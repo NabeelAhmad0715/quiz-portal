@@ -14,7 +14,7 @@ module.exports = {
     'arrow-body-style': 'off',
     'prefer-arrow-callback': 'off',
     'max-classes-per-file': ['error', 2],
-    // 'global-require': 'off',
+    'global-require': 'off',
     'import/no-dynamic-require': 'off',
   },
 };
