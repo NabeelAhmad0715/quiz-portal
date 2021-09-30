@@ -11,7 +11,7 @@ module.exports = {
   rules: {
     'prettier/prettier': 'error',
     'no-console': 'off',
-    'arrow-body-style': 'off',
+    // 'arrow-body-style': 'off',
     'prefer-arrow-callback': 'off',
     'max-classes-per-file': ['error', 2],
     'global-require': 'off',
