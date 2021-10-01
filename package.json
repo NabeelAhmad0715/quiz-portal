@@ -43,6 +43,7 @@
   },
   "homepage": "https://github.com/NabeelAhmad0715/quiz-portal#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "dotenv": "^10.0.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
