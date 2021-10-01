@@ -2,21 +2,21 @@
   "development": {
     "username": "postgres",
     "password": "nabeel69",
-    "database": "quiz-portal",
+    "database": "quiz_portal",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
     "password": "nabeel69",
-    "database": "quiz-portal",
+    "database": "quiz_portal",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
     "username": "postgres",
     "password": "nabeel69",
-    "database": "quiz-portal",
+    "database": "quiz_portal",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }
