@@ -1,16 +1,16 @@
 const express = require('express');
+const indexRouter = require('./routes/index');
 
 const app = express();
 require('dotenv').config();
 
 const port = process.env.PORT;
 
-// app = app.Route();
-app.get('/', (req, res) => {
-  res.writeHead(200, { 'content-type': 'text/html' });
-  res.end(
-    '<h1 style="text-align:center">Welcome to InvoZone NodeJS Training Session</h1>',
-  );
+app.use('/', indexRouter);
+
+// catch 404 and forward to error handler
+app.use((req, res) => {
+  res.status(404).send({ error: 'Not found' });
 });
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
