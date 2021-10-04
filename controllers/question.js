@@ -1,9 +1,9 @@
 module.exports = {
-  index(req, res) {
+  index(_req, res, next) {
     return res.json('view all questions');
   },
 
-  show(req, res) {
+  show(req, res, next) {
     return res.json('get question by id');
   },
 
