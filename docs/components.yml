@@ -1,0 +1,80 @@
+components:
+  schemas:
+    Student:
+      type: object
+      required:
+        name
+        email
+        password
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        createdAt:
+          type: timestamp
+        updatedAt:
+          type: timestamp
+      example:
+        id: 1
+        name: fake name
+        email: fakename@gmail.com
+        password: 12345678
+        createdAt: '2021-09-27 18:28:54'
+        updatedAt: '2021-09-27 18:28:54'
+    Teacher:
+      type: object
+      required:
+        name
+        email
+        password
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        createdAt:
+          type: timestamp
+        updatedAt:
+          type: timestamp
+      example:
+        id: 1
+        name: fake name
+        email: fakename@gmail.com
+        password: 12345678
+        createdAt: '2021-09-27 18:28:54'
+        updatedAt: '2021-09-27 18:28:54'
+  Error:
+    type: object
+    properties:
+      code:
+        type: number
+      message:
+        type: string
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              student:
+                $ref: '#/components/schemas/Student'
+    "404":
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 404
+            message: Not Found
