@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const QuestionController = require('../controllers').question;
 
-/* Student Router */
+/* Questions Router */
 router.get('/', QuestionController.index);
 router.get('/:id', QuestionController.show);
 router.post('/', QuestionController.store);

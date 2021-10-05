@@ -13,12 +13,12 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/teachers/{teacher_id}/question-banks/{question_bank_id}/schedule-quizzes:
+ * /api/users/{user_id}/question-banks/{question_bank_id}/schedule-quizzes:
  *   get:
  *     summary: all schedule Quizzes
  *     tags: [Schedule Quizzes]
  *     parameters:
- *       - name: teacher_id
+ *       - name: user_id
  *         in: path
  *         type: integer
  *         required: true
@@ -33,15 +33,15 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - teacher_id
+ *               - user_id
  *               - question_bank_id
  *             properties:
- *               teacher_id:
+ *               user_id:
  *                 type: integer
  *               question_bank_id:
  *                 type: integer
  *             example:
- *               teacher_id: 1
+ *               user_id: 1
  *               question_bank_id: 1
  *     responses:
  *       "200":
@@ -55,8 +55,8 @@ module.exports = router;
  *                   $ref: '#/components/schemas/scheduleQuiz'
  *                 questionBank:
  *                   $ref: '#/components/schemas/QuestionBank'
- *                 teacher:
- *                   $ref: '#/components/schemas/Teacher'
+ *                 User:
+ *                   $ref: '#/components/schemas/User'
  *       "404":
  *         description: Not Found
  *         content:
@@ -70,7 +70,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/teachers/{teacher_id}/question-banks/{question_bank_id}/schedule-quizzes/{id}:
+ * /api/users/{user_id}/question-banks/{question_bank_id}/schedule-quizzes/{id}:
  *   get:
  *     summary: get schedule Quiz by id
  *     tags: [Schedule Quizzes]
@@ -79,7 +79,7 @@ module.exports = router;
  *         in: path
  *         type: integer
  *         required: true
- *       - name: teacher_id
+ *       - name: user_id
  *         in: path
  *         type: integer
  *         required: true
@@ -95,18 +95,18 @@ module.exports = router;
  *             type: object
  *             required:
  *               - id
- *               - teacher_id
+ *               - user_id
  *               - question_bank_id
  *             properties:
  *               id:
  *                 type: integer
- *               teacher_id:
+ *               user_id:
  *                 type: integer
  *               question_bank_id:
  *                 type: integer
  *             example:
  *               id: 1
- *               teacher_id: 1
+ *               user_id: 1
  *               question_bank_id: 1
  *     responses:
  *       "200":
@@ -120,8 +120,8 @@ module.exports = router;
  *                   $ref: '#/components/schemas/scheduleQuiz'
  *                 questionBank:
  *                   $ref: '#/components/schemas/QuestionBank'
- *                 teacher:
- *                   $ref: '#/components/schemas/Teacher'
+ *                 User:
+ *                   $ref: '#/components/schemas/User'
  *       "404":
  *         description: Not Found
  *         content:
@@ -135,12 +135,12 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/teachers/{teacher_id}/question-banks/{question_bank_id}/schedule-quizzes:
+ * /api/users/{user_id}/question-banks/{question_bank_id}/schedule-quizzes:
  *   post:
  *     summary: add schedule Quiz
  *     tags: [Schedule Quizzes]
  *     parameters:
- *       - name: teacher_id
+ *       - name: user_id
  *         in: path
  *         type: integer
  *         required: true
@@ -155,12 +155,12 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - teacher_id
+ *               - user_id
  *               - question_bank_id
  *               - start_dateTime
  *               - end_dateTime
  *             properties:
- *               teacher_id:
+ *               user_id:
  *                 type: integer
  *               question_bank_id:
  *                 type: integer
@@ -169,7 +169,7 @@ module.exports = router;
  *               end_dateTime:
  *                 type: timestamp
  *             example:
- *               teacher_id: 1
+ *               user_id: 1
  *               question_bank_id: 1
  *               start_dateTime: '2021-10-06 01:32:45'
  *               end_dateTime: '2021-10-06 02:32:45'
@@ -196,7 +196,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/teachers/{teacher_id}/question-banks/{question_bank_id}/schedule-quizzes/{id}:
+ * /api/users/{user_id}/question-banks/{question_bank_id}/schedule-quizzes/{id}:
  *   put:
  *     summary: update schedule Quiz by id
  *     tags: [Schedule Quizzes]
@@ -205,7 +205,7 @@ module.exports = router;
  *         in: path
  *         type: integer
  *         required: true
- *       - name: teacher_id
+ *       - name: user_id
  *         in: path
  *         type: integer
  *         required: true
@@ -220,12 +220,12 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - teacher_id
+ *               - user_id
  *               - question_bank_id
  *               - start_dateTime
  *               - end_dateTime
  *             properties:
- *               teacher_id:
+ *               user_id:
  *                 type: integer
  *               question_bank_id:
  *                 type: integer
@@ -234,7 +234,7 @@ module.exports = router;
  *               end_dateTime:
  *                 type: timestamp
  *             example:
- *               teacher_id: 1
+ *               user_id: 1
  *               question_bank_id: 1
  *               start_dateTime: '2021-10-06 01:32:45'
  *               end_dateTime: '2021-10-06 02:32:45'
@@ -261,7 +261,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/teachers/{teacher_id}/question-banks/{question_bank_id}/schedule-quizzes/{id}:
+ * /api/users/{user_id}/question-banks/{question_bank_id}/schedule-quizzes/{id}:
  *   delete:
  *     summary: delete schedule Quiz by id
  *     tags: [Schedule Quizzes]
@@ -270,7 +270,7 @@ module.exports = router;
  *         in: path
  *         type: integer
  *         required: true
- *       - name: teacher_id
+ *       - name: user_id
  *         in: path
  *         type: integer
  *       - name: question_bank_id
@@ -284,18 +284,18 @@ module.exports = router;
  *             type: object
  *             required:
  *               - id
- *               - teacher_id
+ *               - user_id
  *               - question_bank_id
  *             properties:
  *               id:
  *                 type: integer
- *               teacher_id:
+ *               user_id:
  *                 type: integer
  *               question_bank_id:
  *                 type: integer
  *             example:
  *               id: 1
- *               teacher_id: 1
+ *               user_id: 1
  *               question_bank_id: 1
  *     responses:
  *       "204":

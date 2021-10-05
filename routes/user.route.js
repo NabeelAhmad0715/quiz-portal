@@ -1,22 +1,22 @@
 const express = require('express');
 
 const router = express.Router();
-const StudentController = require('../controllers').student;
+const UserController = require('../controllers').user;
 
-/* Student Router */
-router.get('/', StudentController.index);
-router.get('/:id', StudentController.show);
-router.post('/', StudentController.store);
-router.put('/:id', StudentController.update);
-router.delete('/:id', StudentController.delete);
+/* User Router */
+router.get('/', UserController.index);
+router.get('/:id', UserController.show);
+router.post('/', UserController.store);
+router.put('/:id', UserController.update);
+router.delete('/:id', UserController.delete);
 module.exports = router;
 
 /**
  * @swagger
- * /api/students:
+ * /api/users:
  *   get:
- *     summary: all students
- *     tags: [Students]
+ *     summary: all users
+ *     tags: [Users]
  *     responses:
  *       "200":
  *         description: OK
@@ -25,8 +25,8 @@ module.exports = router;
  *             schema:
  *               type: object
  *               properties:
- *                 student:
- *                   $ref: '#/components/schemas/Student'
+ *                 User:
+ *                   $ref: '#/components/schemas/User'
  *       "404":
  *         description: Not Found
  *         content:
@@ -40,10 +40,10 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/students/{id}:
+ * /api/users/{id}:
  *   get:
- *     summary: get student by id
- *     tags: [Students]
+ *     summary: get user by id
+ *     tags: [Users]
  *     parameters:
  *       - name: id
  *         in: path
@@ -70,8 +70,8 @@ module.exports = router;
  *             schema:
  *               type: object
  *               properties:
- *                 student:
- *                   $ref: '#/components/schemas/Student'
+ *                 User:
+ *                   $ref: '#/components/schemas/User'
  *       "404":
  *         description: Not Found
  *         content:
@@ -85,10 +85,10 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/students:
+ * /api/users:
  *   post:
- *     summary: add student
- *     tags: [Students]
+ *     summary: add user
+ *     tags: [Users]
  *     requestBody:
  *       required: true
  *       content:
@@ -118,8 +118,8 @@ module.exports = router;
  *             schema:
  *               type: object
  *               properties:
- *                 student:
- *                   $ref: '#/components/schemas/Student'
+ *                 User:
+ *                   $ref: '#/components/schemas/User'
  *       "404":
  *         description: Not Found
  *         content:
@@ -133,10 +133,10 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/students/{id}:
+ * /api/users/{id}:
  *   put:
- *     summary: update student by id
- *     tags: [Students]
+ *     summary: update user by id
+ *     tags: [Users]
  *     parameters:
  *       - in: query
  *         name: id
@@ -170,12 +170,8 @@ module.exports = router;
  *             schema:
  *               type: object
  *               properties:
- *                 student:
- *                   $ref: '#/components/schemas/Student'
- *                 course:
- *                   $ref: '#/components/schemas/Course'
- *                 classroom:
- *                   $ref: '#/components/schemas/Classroom'
+ *                 User:
+ *                   $ref: '#/components/schemas/User'
  *       "404":
  *         description: Not Found
  *         content:
@@ -184,15 +180,15 @@ module.exports = router;
  *               $ref: '#/components/schemas/Error'
  *             example:
  *               code: 404
- *               message: Student Not Found
+ *               message: User Not Found
  */
 
 /**
  * @swagger
- * /api/students/{id}:
+ * /api/users/{id}:
  *   delete:
- *     summary: delete student by id
- *     tags: [Students]
+ *     summary: delete user by id
+ *     tags: [Users]
  *     parameters:
  *       - in: query
  *         name: id
@@ -221,5 +217,5 @@ module.exports = router;
  *               $ref: '#/components/schemas/Error'
  *             example:
  *               code: 404
- *               message: Student Not Found
+ *               message: User Not Found
  */

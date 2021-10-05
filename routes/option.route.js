@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const OptionController = require('../controllers').option;
 
-/* Student Router */
+/* Options Router */
 router.get('/', OptionController.index);
 router.get('/:id', OptionController.show);
 router.post('/', OptionController.store);

@@ -1,24 +1,28 @@
 const express = require('express');
 
 const router = express.Router();
-const StudentQuizAttemptResponseController = require('../controllers/studentQuizAttemptResponse.controller');
+const UserScheduleQuizController = require('../controllers/userScheduleQuiz.controller');
 
-/* Student Quiz Attempts Router */
-router.get('/', StudentQuizAttemptResponseController.index);
-router.get('/:id', StudentQuizAttemptResponseController.show);
-router.post('/', StudentQuizAttemptResponseController.store);
-router.put('/:id', StudentQuizAttemptResponseController.update);
-router.delete('/:id', StudentQuizAttemptResponseController.delete);
+/* Schedule Quiz Router */
+router.get('/', UserScheduleQuizController.index);
+router.get('/:id', UserScheduleQuizController.show);
+router.post('/', UserScheduleQuizController.store);
+router.put('/:id', UserScheduleQuizController.update);
+router.delete('/:id', UserScheduleQuizController.delete);
 module.exports = router;
 
 /**
  * @swagger
- * /api/student-quiz-attempts/{studentQuiz_attempt_id}/student-quiz-attempt-responses:
+ * /api/schedule-quizzes/{schedule_quiz_id}/users/{user_id}/user-schedule-quizzes:
  *   get:
- *     summary: all student quiz attempt responses
- *     tags: [Student Quiz Attempt Responses]
+ *     summary: all user schedule quizzes
+ *     tags: [User Schedule Quizzes]
  *     parameters:
- *       - name: student_quiz_attempt_id
+ *       - name: schedule_quiz_id
+ *         in: path
+ *         type: integer
+ *         required: true
+ *       - name: user_id
  *         in: path
  *         type: integer
  *         required: true
@@ -29,12 +33,16 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - student_quiz_attempt_id
+ *               - schedule_quiz_id
+ *               - user_id
  *             properties:
- *               student_quiz_attempt_id:
+ *               schedule_quiz_id:
+ *                 type: integer
+ *               user_id:
  *                 type: integer
  *             example:
- *               student_quiz_attempt_id: 1
+ *               schedule_quiz_id: 1
+ *               user_id: 1
  *     responses:
  *       "200":
  *         description: OK
@@ -43,10 +51,12 @@ module.exports = router;
  *             schema:
  *               type: object
  *               properties:
- *                 StudentQuizAttemptResponse:
- *                   $ref: '#/components/schemas/StudentQuizAttemptResponse'
- *                 StudentQuizAttempt:
- *                   $ref: '#/components/schemas/StudentQuizAttempt'
+ *                 UserScheduleQuiz:
+ *                   $ref: '#/components/schemas/UserScheduleQuiz'
+ *                 scheduleQuiz:
+ *                   $ref: '#/components/schemas/scheduleQuiz'
+ *                 User:
+ *                   $ref: '#/components/schemas/User'
  *       "404":
  *         description: Not Found
  *         content:
@@ -60,16 +70,20 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/student-quiz-attempts/{studentQuiz_attempt_id}/student-quiz-attempt-responses/{id}:
+ * /api/schedule-quizzes/{schedule_quiz_id}/users/{user_id}/schedule-quizzes/{id}:
  *   get:
- *     summary: get student quiz attempt responses by id
- *     tags: [Student Quiz Attempt Responses]
+ *     summary: get user schedule Quiz by id
+ *     tags: [User Schedule Quizzes]
  *     parameters:
  *       - name: id
  *         in: path
  *         type: integer
  *         required: true
- *       - name: student_quiz_attempt_id
+ *       - name: schedule_quiz_id
+ *         in: path
+ *         type: integer
+ *         required: true
+ *       - name: user_id
  *         in: path
  *         type: integer
  *         required: true
@@ -81,15 +95,19 @@ module.exports = router;
  *             type: object
  *             required:
  *               - id
- *               - student_quiz_attempt_id
+ *               - schedule_quiz_id
+ *               - user_id
  *             properties:
  *               id:
  *                 type: integer
- *               student_quiz_attempt_id:
+ *               schedule_quiz_id:
+ *                 type: integer
+ *               user_id:
  *                 type: integer
  *             example:
  *               id: 1
- *               student_quiz_attempt_id: 1
+ *               schedule_quiz_id: 1
+ *               user_id: 1
  *     responses:
  *       "200":
  *         description: OK
@@ -98,10 +116,12 @@ module.exports = router;
  *             schema:
  *               type: object
  *               properties:
- *                 StudentQuizAttemptResponse:
- *                   $ref: '#/components/schemas/StudentQuizAttemptResponse'
- *                 StudentQuizAttempt:
- *                   $ref: '#/components/schemas/StudentQuizAttempt'
+ *                 UserScheduleQuiz:
+ *                   $ref: '#/components/schemas/UserScheduleQuiz'
+ *                 scheduleQuiz:
+ *                   $ref: '#/components/schemas/scheduleQuiz'
+ *                 User:
+ *                   $ref: '#/components/schemas/User'
  *       "404":
  *         description: Not Found
  *         content:
@@ -115,12 +135,16 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/student-quiz-attempts/{studentQuiz_attempt_id}/student-quiz-attempt-responses:
+ * /api/schedule-quizzes/{schedule_quiz_id}/users/{user_id}/user-schedule-quizzes:
  *   post:
- *     summary: add student quiz attempt responses
- *     tags: [Student Quiz Attempt Responses]
+ *     summary: add schedule Quiz
+ *     tags: [User Schedule Quizzes]
  *     parameters:
- *       - name: student_quiz_attempt_id
+ *       - name: schedule_quiz_id
+ *         in: path
+ *         type: integer
+ *         required: true
+ *       - name: user_id
  *         in: path
  *         type: integer
  *         required: true
@@ -131,28 +155,16 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - student_quiz_attempt_id
- *               - question_id
- *               - obtained_marks
- *               - is_correct
- *               - option_id
+ *               - schedule_quiz_id
+ *               - user_id
  *             properties:
- *               student_quiz_attempt_id:
+ *               schedule_quiz_id:
  *                 type: integer
- *               question_id:
- *                 type: integer
- *               obtained_marks:
- *                 type: integer
- *               is_correct:
- *                 type: boolean
- *               option_id:
+ *               user_id:
  *                 type: integer
  *             example:
- *               student_quiz_attempt_id: 1
- *               question_id: 1
- *               obtained_marks: 20
- *               is_correct: false
- *               option_id: 1
+ *               schedule_quiz_id: 1
+ *               user_id: 1
  *     responses:
  *       "200":
  *         description: OK
@@ -161,8 +173,8 @@ module.exports = router;
  *             schema:
  *               type: object
  *               properties:
- *                 StudentQuizAttemptResponse:
- *                   $ref: '#/components/schemas/StudentQuizAttemptResponse'
+ *                 UserScheduleQuiz:
+ *                   $ref: '#/components/schemas/UserScheduleQuiz'
  *       "404":
  *         description: Not Found
  *         content:
@@ -176,16 +188,22 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/student-quiz-attempts/{studentQuiz_attempt_id}/student-quiz-attempt-responses/{id}:
+ * /api/schedule-quizzes/{schedule_quiz_id}/users/{user_id}/schedule-quizzes/{id}:
  *   put:
- *     summary: update student quiz attempt responses by id
- *     tags: [Student Quiz Attempt Responses]
+ *     summary: update user schedule Quiz by id
+ *     tags: [User Schedule Quizzes]
  *     parameters:
- *       - in: query
- *         name: id
+ *       - name: id
+ *         in: path
+ *         type: integer
  *         required: true
- *       - in: query
- *         name: student_quiz_attempt_id
+ *       - name: schedule_quiz_id
+ *         in: path
+ *         type: integer
+ *         required: true
+ *       - name: user_id
+ *         in: path
+ *         type: integer
  *         required: true
  *     requestBody:
  *       required: false
@@ -194,28 +212,16 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - student_quiz_attempt_id
- *               - question_id
- *               - obtained_marks
- *               - is_correct
- *               - option_id
+ *               - schedule_quiz_id
+ *               - user_id
  *             properties:
- *               student_quiz_attempt_id:
+ *               schedule_quiz_id:
  *                 type: integer
- *               question_id:
- *                 type: integer
- *               obtained_marks:
- *                 type: integer
- *               is_correct:
- *                 type: boolean
- *               option_id:
+ *               user_id:
  *                 type: integer
  *             example:
- *               student_quiz_attempt_id: 1
- *               question_id: 1
- *               obtained_marks: 20
- *               is_correct: false
- *               option_id: 1
+ *               schedule_quiz_id: 1
+ *               user_id: 1
  *     responses:
  *       "200":
  *         description: OK
@@ -224,8 +230,8 @@ module.exports = router;
  *             schema:
  *               type: object
  *               properties:
- *                 StudentQuizAttemptResponse:
- *                   $ref: '#/components/schemas/StudentQuizAttemptResponse'
+ *                 UserScheduleQuiz:
+ *                   $ref: '#/components/schemas/UserScheduleQuiz'
  *       "404":
  *         description: Not Found
  *         content:
@@ -234,22 +240,26 @@ module.exports = router;
  *               $ref: '#/components/schemas/Error'
  *             example:
  *               code: 404
- *               message: student quiz attempts Not Found
+ *               message: Question Not Found
  */
 
 /**
  * @swagger
- * /api/student-quiz-attempts/{studentQuiz_attempt_id}/student-quiz-attempt-responses/{id}:
+ * /api/schedule-quizzes/{schedule_quiz_id}/users/{user_id}/schedule-quizzes/{id}:
  *   delete:
- *     summary: delete student quiz attempt responses by id
- *     tags: [Student Quiz Attempt Responses]
+ *     summary: delete user schedule Quiz by id
+ *     tags: [User Schedule Quizzes]
  *     parameters:
- *       - in: query
- *         name: id
+ *       - name: id
+ *         in: path
+ *         type: integer
  *         required: true
- *       - in: query
- *         name: student_quiz_attempt_id
- *         required: true
+ *       - name: schedule_quiz_id
+ *         in: path
+ *         type: integer
+ *       - name: user_id
+ *         in: path
+ *         type: integer
  *     requestBody:
  *       required: false
  *       content:
@@ -258,15 +268,19 @@ module.exports = router;
  *             type: object
  *             required:
  *               - id
- *               - student_quiz_attempt_id
+ *               - schedule_quiz_id
+ *               - user_id
  *             properties:
  *               id:
  *                 type: integer
- *               student_quiz_attempt_id:
+ *               schedule_quiz_id:
+ *                 type: integer
+ *               user_id:
  *                 type: integer
  *             example:
  *               id: 1
- *               student_quiz_attempt_id: 1
+ *               schedule_quiz_id: 1
+ *               user_id: 1
  *     responses:
  *       "204":
  *         description: OK
@@ -278,5 +292,5 @@ module.exports = router;
  *               $ref: '#/components/schemas/Error'
  *             example:
  *               code: 404
- *               message: student quiz attempts Not Found
+ *               message: schedule Quiz Not Found
  */

@@ -1,14 +1,11 @@
 const express = require('express');
-const studentRoute = require('./student.route');
-const teacherRoute = require('./teacher.route');
-const adminRoute = require('./admin.route');
+const userRoute = require('./user.route');
 const questionBankRoute = require('./questionBank.route');
 const questionRoute = require('./question.route');
 const optionRoute = require('./option.route');
 const scheduleQuizRoute = require('./scheduleQuiz.route');
-const studentScheduleQuizRoute = require('./studentScheduleQuiz.route');
-const studentQuizAttemptRoute = require('./studentQuizAttempt.route');
-const studentQuizAttemptResponseRoute = require('./studentQuizAttemptResponse.route');
+const userScheduleQuizRoute = require('./userScheduleQuiz.route');
+const userQuizAttemptRoute = require('./userQuizAttempt.route');
 const docsRoute = require('./docs.route');
 const config = require('../config/config.json');
 
@@ -16,19 +13,11 @@ const router = express.Router();
 
 const defaultRoutes = [
   {
-    path: '/api/students',
-    route: studentRoute,
+    path: '/api/users',
+    route: userRoute,
   },
   {
-    path: '/api/teachers',
-    route: teacherRoute,
-  },
-  {
-    path: '/api/admins',
-    route: adminRoute,
-  },
-  {
-    path: '/api/teacher/{teacher}/question-banks',
+    path: '/api/user/{user}/question-banks',
     route: questionBankRoute,
   },
   {
@@ -44,16 +33,12 @@ const defaultRoutes = [
     route: scheduleQuizRoute,
   },
   {
-    path: '/api/student-schedule-quizzes',
-    route: studentScheduleQuizRoute,
+    path: '/api/user-schedule-quizzes',
+    route: userScheduleQuizRoute,
   },
   {
-    path: '/api/student-quiz-attempts',
-    route: studentQuizAttemptRoute,
-  },
-  {
-    path: '/api/student-quiz-attempt-responses',
-    route: studentQuizAttemptResponseRoute,
+    path: '/api/user-quiz-attempts',
+    route: userQuizAttemptRoute,
   },
 ];
 
