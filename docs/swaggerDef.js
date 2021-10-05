@@ -1,4 +1,5 @@
 const { version } = require('../package.json');
+require('dotenv').config();
 
 const swaggerDef = {
   openapi: '3.0.1',
@@ -12,7 +13,7 @@ const swaggerDef = {
   },
   servers: [
     {
-      url: 'http://localhost:3000/',
+      url: `http://localhost:${process.env.PORT}/`,
     },
   ],
 };

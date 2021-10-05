@@ -1,21 +1,21 @@
 module.exports = {
-  index(req, res) {
+  index(_req, res, _next) {
     return res.json('view all teachers');
   },
 
-  show(req, res) {
+  show(_req, res, _next) {
     return res.json('get teacher by id');
   },
 
-  store(req, res) {
+  store(_req, res, _next) {
     return res.json('store teacher records');
   },
 
-  update(req, res) {
+  update(_req, res, _next) {
     return res.json('update teacher records');
   },
 
-  delete(req, res) {
+  delete(_req, res, _next) {
     return res.json('delete teacher records');
   },
 };

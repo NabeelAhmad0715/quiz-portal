@@ -1,21 +1,40 @@
 const express = require('express');
 
 const router = express.Router();
-const StudentController = require('../controllers').student;
+const QuestionBankController = require('../controllers').questionBank;
 
-/* Student Router */
-router.get('/', StudentController.index);
-router.get('/:id', StudentController.show);
-router.post('/', StudentController.store);
-router.put('/:id', StudentController.update);
-router.delete('/:id', StudentController.delete);
+/* question Bank Router */
+router.get('/', QuestionBankController.index);
+router.get('/:id', QuestionBankController.show);
+router.post('/', QuestionBankController.store);
+router.put('/:id', QuestionBankController.update);
+router.delete('/:id', QuestionBankController.delete);
 module.exports = router;
+
 /**
  * @swagger
- * /api/students:
+ * /api/teacher/{teacher_id}/question-banks:
  *   get:
- *     summary: all students
- *     tags: [Students]
+ *     summary: all question Banks
+ *     tags: [Question Banks]
+ *     parameters:
+ *       - name: teacher_id
+ *         in: path
+ *         type: integer
+ *         required: true
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - teacher_id
+ *             properties:
+ *               teacher_id:
+ *                 type: integer
+ *             example:
+ *               teacher_id: 1
  *     responses:
  *       "200":
  *         description: OK
@@ -24,8 +43,14 @@ module.exports = router;
  *             schema:
  *               type: object
  *               properties:
- *                 student:
- *                   $ref: '#/components/schemas/Student'
+ *                 questionBank:
+ *                   $ref: '#/components/schemas/QuestionBank'
+ *                 question:
+ *                   $ref: '#/components/schemas/Question'
+ *                 scheduleQuiz:
+ *                   $ref: '#/components/schemas/ScheduleQuiz'
+ *                 teacher:
+ *                   $ref: '#/components/schemas/Teacher'
  *       "404":
  *         description: Not Found
  *         content:
@@ -39,12 +64,16 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/students/{id}:
+ * /api/teacher/{teacher_id}/question-banks/{id}:
  *   get:
- *     summary: get student by id
- *     tags: [Students]
+ *     summary: get question Bank by id
+ *     tags: [Question Banks]
  *     parameters:
  *       - name: id
+ *         in: path
+ *         type: integer
+ *         required: true
+ *       - name: teacher_id
  *         in: path
  *         type: integer
  *         required: true
@@ -56,11 +85,15 @@ module.exports = router;
  *             type: object
  *             required:
  *               - id
+ *               - teacher_id
  *             properties:
  *               id:
  *                 type: integer
+ *               teacher_id:
+ *                 type: integer
  *             example:
  *               id: 1
+ *               teacher_id: 1
  *     responses:
  *       "200":
  *         description: OK
@@ -69,8 +102,14 @@ module.exports = router;
  *             schema:
  *               type: object
  *               properties:
- *                 student:
- *                   $ref: '#/components/schemas/Student'
+ *                 questionBank:
+ *                   $ref: '#/components/schemas/QuestionBank'
+ *                 question:
+ *                   $ref: '#/components/schemas/Question'
+ *                 scheduleQuiz:
+ *                   $ref: '#/components/schemas/ScheduleQuiz'
+ *                 teacher:
+ *                   $ref: '#/components/schemas/Teacher'
  *       "404":
  *         description: Not Found
  *         content:
@@ -84,10 +123,15 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/students:
+ * /api/teacher/{teacher_id}/question-banks:
  *   post:
- *     summary: add student
- *     tags: [Students]
+ *     summary: add question Bank
+ *     tags: [Question Banks]
+ *     parameters:
+ *       - name: teacher_id
+ *         in: path
+ *         type: integer
+ *         required: true
  *     requestBody:
  *       required: true
  *       content:
@@ -95,20 +139,20 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
+ *               - teacher_id
  *               - name
- *               - email
- *               - password
+ *               - type
  *             properties:
+ *               teacher_id:
+ *                 type: integer
  *               name:
  *                 type: string
- *               email:
- *                 type: string
- *               password:
+ *               type:
  *                 type: string
  *             example:
+ *               teacher_id: 1
  *               name: xyz
- *               email: xyz@gmail.com
- *               password: xyz1234
+ *               type: javascript
  *     responses:
  *       "200":
  *         description: OK
@@ -117,8 +161,8 @@ module.exports = router;
  *             schema:
  *               type: object
  *               properties:
- *                 student:
- *                   $ref: '#/components/schemas/Student'
+ *                 questionBank:
+ *                   $ref: '#/components/schemas/QuestionBank'
  *       "404":
  *         description: Not Found
  *         content:
@@ -132,13 +176,16 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/students/{id}:
+ * /api/teacher/{teacher_id}/question-banks/{id}:
  *   put:
- *     summary: update student by id
- *     tags: [Students]
+ *     summary: update question Bank by id
+ *     tags: [Question Banks]
  *     parameters:
  *       - in: query
  *         name: id
+ *         required: true
+ *       - in: query
+ *         name: teacher_id
  *         required: true
  *     requestBody:
  *       required: false
@@ -147,20 +194,20 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
+ *               - teacher_id
  *               - name
- *               - email
- *               - password
+ *               - type
  *             properties:
+ *               teacher_id:
+ *                 type: integer
  *               name:
  *                 type: string
- *               email:
- *                 type: string
- *               password:
+ *               type:
  *                 type: string
  *             example:
+ *               teacher_id: xyz
  *               name: xyz
- *               email: xyz@gmail.com
- *               password: xyz1234
+ *               type: javascript
  *     responses:
  *       "200":
  *         description: OK
@@ -169,12 +216,8 @@ module.exports = router;
  *             schema:
  *               type: object
  *               properties:
- *                 student:
- *                   $ref: '#/components/schemas/Student'
- *                 course:
- *                   $ref: '#/components/schemas/Course'
- *                 classroom:
- *                   $ref: '#/components/schemas/Classroom'
+ *                 questionBank:
+ *                   $ref: '#/components/schemas/QuestionBank'
  *       "404":
  *         description: Not Found
  *         content:
@@ -183,18 +226,21 @@ module.exports = router;
  *               $ref: '#/components/schemas/Error'
  *             example:
  *               code: 404
- *               message: Student Not Found
+ *               message: Question Bank Not Found
  */
 
 /**
  * @swagger
- * /api/students/{id}:
+ * /api/teacher/{teacher_id}/question-banks/{id}:
  *   delete:
- *     summary: delete student by id
- *     tags: [Students]
+ *     summary: delete question bank by id
+ *     tags: [Question Banks]
  *     parameters:
  *       - in: query
  *         name: id
+ *         required: true
+ *       - in: query
+ *         name: teacher_id
  *         required: true
  *     requestBody:
  *       required: false
@@ -204,11 +250,15 @@ module.exports = router;
  *             type: object
  *             required:
  *               - id
+ *               - teacher_id
  *             properties:
  *               id:
  *                 type: integer
+ *               teacher_id:
+ *                 type: integer
  *             example:
  *               id: 1
+ *               teacher_id: 1
  *     responses:
  *       "204":
  *         description: OK
@@ -220,5 +270,5 @@ module.exports = router;
  *               $ref: '#/components/schemas/Error'
  *             example:
  *               code: 404
- *               message: Student Not Found
+ *               message: Question Bank Not Found
  */

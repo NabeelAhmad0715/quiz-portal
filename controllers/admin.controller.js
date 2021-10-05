@@ -1,21 +1,21 @@
 module.exports = {
-  index(req, res) {
+  index(_req, res, _next) {
     return res.json('view all admins');
   },
 
-  show(req, res) {
+  show(_req, res, _next) {
     return res.json('get admin by id');
   },
 
-  store(req, res) {
+  store(_req, res, _next) {
     return res.json('store admin records');
   },
 
-  update(req, res) {
+  update(_req, res, _next) {
     return res.json('update admin records');
   },
 
-  delete(req, res) {
+  delete(_req, res, _next) {
     return res.json('delete admin records');
   },
 };

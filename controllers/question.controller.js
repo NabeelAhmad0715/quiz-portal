@@ -1,21 +1,21 @@
 module.exports = {
-  index(req, res) {
+  index(_req, res, _next) {
     return res.json('view all questions');
   },
 
-  show(req, res) {
+  show(_req, res, _next) {
     return res.json('get question by id');
   },
 
-  store(req, res) {
+  store(_req, res, _next) {
     return res.json('store question records');
   },
 
-  update(req, res) {
+  update(_req, res, _next) {
     return res.json('update question records');
   },
 
-  delete(req, res) {
+  delete(_req, res, _next) {
     return res.json('delete question records');
   },
 };
