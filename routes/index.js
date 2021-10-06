@@ -1,5 +1,6 @@
 const express = require('express');
 const userRoute = require('./user.route');
+const roleRoute = require('./role.route');
 const questionBankRoute = require('./questionBank.route');
 const questionRoute = require('./question.route');
 const optionRoute = require('./option.route');
@@ -15,6 +16,10 @@ const defaultRoutes = [
   {
     path: '/api/users',
     route: userRoute,
+  },
+  {
+    path: '/api/roles',
+    route: roleRoute,
   },
   {
     path: '/api/user/{user}/question-banks',
