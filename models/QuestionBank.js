@@ -17,10 +17,16 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'question_bank_id',
         as: 'schedule_quizzes',
       });
+
+      QuestionBank.belongsTo(models.User, {
+        foreignKey: 'question_bank_id',
+        as: 'users',
+      });
     }
   }
   QuestionBank.init(
     {
+      teacher_id: DataTypes.INTEGER,
       name: DataTypes.STRING,
       type: DataTypes.STRING,
     },

@@ -7,6 +7,17 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      teacher_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        foreignKey: true,
+        references: {
+          // Required field
+          model: 'teachers',
+          key: 'id',
+        },
+        onDelete: 'cascade',
+      },
       name: {
         allowNull: false,
         type: Sequelize.STRING,

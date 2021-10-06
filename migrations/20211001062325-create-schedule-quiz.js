@@ -7,13 +7,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      teacher_id: {
+      user_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
         foreignKey: true,
         references: {
           // Required field
-          model: 'teachers',
+          model: 'users',
           key: 'id',
         },
         onDelete: 'cascade',
