@@ -1,21 +1,22 @@
 const express = require('express');
 
 const router = express.Router();
-const StudentController = require('../controllers').student;
+const RolesController = require('../controllers').role;
 
-/* Student Router */
-router.get('/', StudentController.index);
-router.get('/:id', StudentController.show);
-router.post('/', StudentController.store);
-router.put('/:id', StudentController.update);
-router.delete('/:id', StudentController.delete);
+/* Route Router */
+router.get('/', RolesController.index);
+router.get('/:id/show', RolesController.show);
+router.post('/create', RolesController.store);
+router.put('/:id/update', RolesController.update);
+router.delete('/:id/delete', RolesController.delete);
 module.exports = router;
+
 /**
  * @swagger
- * /api/students:
+ * /api/roles:
  *   get:
- *     summary: all students
- *     tags: [Students]
+ *     summary: all roles
+ *     tags: [Roles]
  *     responses:
  *       "200":
  *         description: OK
@@ -24,8 +25,8 @@ module.exports = router;
  *             schema:
  *               type: object
  *               properties:
- *                 student:
- *                   $ref: '#/components/schemas/Student'
+ *                 Role:
+ *                   $ref: '#/components/schemas/Role'
  *       "404":
  *         description: Not Found
  *         content:
@@ -39,10 +40,10 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/students/{id}:
+ * /api/roles/{id}/show:
  *   get:
- *     summary: get student by id
- *     tags: [Students]
+ *     summary: get role by id
+ *     tags: [Roles]
  *     parameters:
  *       - name: id
  *         in: path
@@ -69,8 +70,8 @@ module.exports = router;
  *             schema:
  *               type: object
  *               properties:
- *                 student:
- *                   $ref: '#/components/schemas/Student'
+ *                 Role:
+ *                   $ref: '#/components/schemas/Role'
  *       "404":
  *         description: Not Found
  *         content:
@@ -84,10 +85,10 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/students:
+ * /api/roles/create:
  *   post:
- *     summary: add student
- *     tags: [Students]
+ *     summary: add role
+ *     tags: [Roles]
  *     requestBody:
  *       required: true
  *       content:
@@ -101,14 +102,8 @@ module.exports = router;
  *             properties:
  *               name:
  *                 type: string
- *               email:
- *                 type: string
- *               password:
- *                 type: string
  *             example:
  *               name: xyz
- *               email: xyz@gmail.com
- *               password: xyz1234
  *     responses:
  *       "200":
  *         description: OK
@@ -117,8 +112,8 @@ module.exports = router;
  *             schema:
  *               type: object
  *               properties:
- *                 student:
- *                   $ref: '#/components/schemas/Student'
+ *                 Role:
+ *                   $ref: '#/components/schemas/Role'
  *       "404":
  *         description: Not Found
  *         content:
@@ -132,10 +127,10 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/students/{id}:
+ * /api/roles/{id}/update:
  *   put:
- *     summary: update student by id
- *     tags: [Students]
+ *     summary: update role by id
+ *     tags: [Roles]
  *     parameters:
  *       - in: query
  *         name: id
@@ -148,19 +143,11 @@ module.exports = router;
  *             type: object
  *             required:
  *               - name
- *               - email
- *               - password
  *             properties:
  *               name:
  *                 type: string
- *               email:
- *                 type: string
- *               password:
- *                 type: string
  *             example:
  *               name: xyz
- *               email: xyz@gmail.com
- *               password: xyz1234
  *     responses:
  *       "200":
  *         description: OK
@@ -169,12 +156,8 @@ module.exports = router;
  *             schema:
  *               type: object
  *               properties:
- *                 student:
- *                   $ref: '#/components/schemas/Student'
- *                 course:
- *                   $ref: '#/components/schemas/Course'
- *                 classroom:
- *                   $ref: '#/components/schemas/Classroom'
+ *                 Role:
+ *                   $ref: '#/components/schemas/Role'
  *       "404":
  *         description: Not Found
  *         content:
@@ -183,15 +166,15 @@ module.exports = router;
  *               $ref: '#/components/schemas/Error'
  *             example:
  *               code: 404
- *               message: Student Not Found
+ *               message: role Not Found
  */
 
 /**
  * @swagger
- * /api/students/{id}:
+ * /api/roles/{id}/delete:
  *   delete:
- *     summary: delete student by id
- *     tags: [Students]
+ *     summary: delete role by id
+ *     tags: [Roles]
  *     parameters:
  *       - in: query
  *         name: id
@@ -220,5 +203,5 @@ module.exports = router;
  *               $ref: '#/components/schemas/Error'
  *             example:
  *               code: 404
- *               message: Student Not Found
+ *               message: role Not Found
  */

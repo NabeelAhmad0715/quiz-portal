@@ -1,17 +1,19 @@
-const student = require('./student');
-const teacher = require('./teacher');
-const admin = require('./admin');
-const questionBank = require('./questionBank');
-const question = require('./question');
-const option = require('./option');
-const scheduleQuiz = require('./scheduleQuiz');
+const user = require('./user.controller');
+const role = require('./role.controller');
+const questionBank = require('./questionBank.controller');
+const question = require('./question.controller');
+const option = require('./option.controller');
+const scheduleQuiz = require('./scheduleQuiz.controller');
+const userScheduleQuiz = require('./userScheduleQuiz.controller');
+const userQuizAttempt = require('./userQuizAttempt.controller');
 
 module.exports = {
-  student,
-  teacher,
-  admin,
+  user,
+  role,
   questionBank,
   question,
   option,
   scheduleQuiz,
+  userScheduleQuiz,
+  userQuizAttempt,
 };

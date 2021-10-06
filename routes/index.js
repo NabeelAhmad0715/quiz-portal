@@ -1,44 +1,49 @@
 const express = require('express');
-const studentRoute = require('./student');
-const teacherRoute = require('./teacher');
-const adminRoute = require('./admin');
-const questionBankRoute = require('./questionBank');
-const questionRoute = require('./question');
-const optionRoute = require('./option');
-const scheduleQuizRoute = require('./scheduleQuiz');
-const docsRoute = require('./docs');
+const userRoute = require('./user.route');
+const roleRoute = require('./role.route');
+const questionBankRoute = require('./questionBank.route');
+const questionRoute = require('./question.route');
+const optionRoute = require('./option.route');
+const scheduleQuizRoute = require('./scheduleQuiz.route');
+const userScheduleQuizRoute = require('./userScheduleQuiz.route');
+const userQuizAttemptRoute = require('./userQuizAttempt.route');
+const docsRoute = require('./docs.route');
 const config = require('../config/config.json');
 
 const router = express.Router();
 
 const defaultRoutes = [
   {
-    path: '/api/students',
-    route: studentRoute,
+    path: '/api/users',
+    route: userRoute,
   },
   {
-    path: '/api/teachers',
-    route: teacherRoute,
+    path: '/api/roles',
+    route: roleRoute,
   },
   {
-    path: '/api/admins',
-    route: adminRoute,
-  },
-  {
-    path: '/api/question-banks',
+    path: '/api/user/{user}/question-banks',
     route: questionBankRoute,
   },
   {
-    path: '/api/questions',
+    path: '/api/question-banks/{questionBank}/questions',
     route: questionRoute,
   },
   {
-    path: '/api/options',
+    path: '/api/question-banks/{questionBank}/questions/{question}/options',
     route: optionRoute,
   },
   {
     path: '/api/schedule-quizzes',
     route: scheduleQuizRoute,
+  },
+  {
+    path: '/api/user-schedule-quizzes',
+    route: userScheduleQuizRoute,
+  },
+  {
+    path: '/api/user-quiz-attempts',
+    route: userQuizAttemptRoute,
   },
 ];
 
@@ -54,7 +59,6 @@ defaultRoutes.forEach((route) => {
   router.use(route.path, route.route);
 });
 
-/* istanbul ignore next */
 if (config.env_development === 'development') {
   devRoutes.forEach((route) => {
     router.use(route.path, route.route);

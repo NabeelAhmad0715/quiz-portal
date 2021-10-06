@@ -1,21 +1,21 @@
 module.exports = {
-  index(req, res) {
+  index(_req, res, _next) {
     return res.json('view all options');
   },
 
-  show(req, res) {
+  show(_req, res, _next) {
     return res.json('get option by id');
   },
 
-  store(req, res) {
+  store(_req, res, _next) {
     return res.json('store option records');
   },
 
-  update(req, res) {
+  update(_req, res, _next) {
     return res.json('update option records');
   },
 
-  delete(req, res) {
+  delete(_req, res, _next) {
     return res.json('delete option records');
   },
 };

@@ -1,22 +1,22 @@
 const express = require('express');
 
 const router = express.Router();
-const TeacherController = require('../controllers').teacher;
+const UserController = require('../controllers').user;
 
-/* Teacher Router */
-router.get('/', TeacherController.index);
-router.get('/:id', TeacherController.show);
-router.post('/', TeacherController.store);
-router.put('/:id', TeacherController.update);
-router.delete('/:id', TeacherController.delete);
+/* User Router */
+router.get('/', UserController.index);
+router.get('/:id/show', UserController.show);
+router.post('/create', UserController.store);
+router.put('/:id/update', UserController.update);
+router.delete('/:id/delete', UserController.delete);
 module.exports = router;
 
 /**
  * @swagger
- * /api/teachers:
+ * /api/users:
  *   get:
- *     summary: all teachers
- *     tags: [Teachers]
+ *     summary: all users
+ *     tags: [Users]
  *     responses:
  *       "200":
  *         description: OK
@@ -25,8 +25,8 @@ module.exports = router;
  *             schema:
  *               type: object
  *               properties:
- *                 teacher:
- *                   $ref: '#/components/schemas/Teacher'
+ *                 User:
+ *                   $ref: '#/components/schemas/User'
  *       "404":
  *         description: Not Found
  *         content:
@@ -40,10 +40,10 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/teachers/{id}:
+ * /api/users/{id}/show:
  *   get:
- *     summary: get teacher by id
- *     tags: [Teachers]
+ *     summary: get user by id
+ *     tags: [Users]
  *     parameters:
  *       - name: id
  *         in: path
@@ -70,8 +70,8 @@ module.exports = router;
  *             schema:
  *               type: object
  *               properties:
- *                 teacher:
- *                   $ref: '#/components/schemas/Teacher'
+ *                 User:
+ *                   $ref: '#/components/schemas/User'
  *       "404":
  *         description: Not Found
  *         content:
@@ -85,10 +85,10 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/teachers:
+ * /api/users/create:
  *   post:
- *     summary: add teacher
- *     tags: [Teachers]
+ *     summary: add user
+ *     tags: [Users]
  *     requestBody:
  *       required: true
  *       content:
@@ -118,8 +118,8 @@ module.exports = router;
  *             schema:
  *               type: object
  *               properties:
- *                 teacher:
- *                   $ref: '#/components/schemas/Teacher'
+ *                 User:
+ *                   $ref: '#/components/schemas/User'
  *       "404":
  *         description: Not Found
  *         content:
@@ -133,10 +133,10 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/teachers/{id}:
+ * /api/users/{id}/update:
  *   put:
- *     summary: update teacher by id
- *     tags: [Teachers]
+ *     summary: update user by id
+ *     tags: [Users]
  *     parameters:
  *       - in: query
  *         name: id
@@ -170,12 +170,8 @@ module.exports = router;
  *             schema:
  *               type: object
  *               properties:
- *                 teacher:
- *                   $ref: '#/components/schemas/Teacher'
- *                 course:
- *                   $ref: '#/components/schemas/Course'
- *                 classroom:
- *                   $ref: '#/components/schemas/Classroom'
+ *                 User:
+ *                   $ref: '#/components/schemas/User'
  *       "404":
  *         description: Not Found
  *         content:
@@ -184,15 +180,15 @@ module.exports = router;
  *               $ref: '#/components/schemas/Error'
  *             example:
  *               code: 404
- *               message: Teacher Not Found
+ *               message: User Not Found
  */
 
 /**
  * @swagger
- * /api/teachers/{id}:
+ * /api/users/{id}/delete:
  *   delete:
- *     summary: delete teacher by id
- *     tags: [Teachers]
+ *     summary: delete user by id
+ *     tags: [Users]
  *     parameters:
  *       - in: query
  *         name: id
@@ -221,5 +217,5 @@ module.exports = router;
  *               $ref: '#/components/schemas/Error'
  *             example:
  *               code: 404
- *               message: Teacher Not Found
+ *               message: User Not Found
  */

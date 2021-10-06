@@ -1,21 +1,21 @@
 module.exports = {
-  index(req, res) {
+  index(_req, res, _next) {
     return res.json('view all schedule quizzes');
   },
 
-  show(req, res) {
+  show(_req, res, _next) {
     return res.json('get schedule quiz by id');
   },
 
-  store(req, res) {
+  store(_req, res, _next) {
     return res.json('store schedule quiz records');
   },
 
-  update(req, res) {
+  update(_req, res, _next) {
     return res.json('update schedule quiz records');
   },
 
-  delete(req, res) {
+  delete(_req, res, _next) {
     return res.json('delete schedule quiz records');
   },
 };
