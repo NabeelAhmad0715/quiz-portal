@@ -5,10 +5,10 @@ const UserController = require('../controllers').user;
 
 /* User Router */
 router.get('/', UserController.index);
-router.get('/:id', UserController.show);
-router.post('/', UserController.store);
-router.put('/:id', UserController.update);
-router.delete('/:id', UserController.delete);
+router.get('/:id/show', UserController.show);
+router.post('/create', UserController.store);
+router.put('/:id/update', UserController.update);
+router.delete('/:id/delete', UserController.delete);
 module.exports = router;
 
 /**
@@ -40,7 +40,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/users/{id}:
+ * /api/users/{id}/show:
  *   get:
  *     summary: get user by id
  *     tags: [Users]
@@ -85,7 +85,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/users:
+ * /api/users/create:
  *   post:
  *     summary: add user
  *     tags: [Users]
@@ -133,7 +133,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/users/{id}:
+ * /api/users/{id}/update:
  *   put:
  *     summary: update user by id
  *     tags: [Users]
@@ -185,7 +185,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/users/{id}:
+ * /api/users/{id}/delete:
  *   delete:
  *     summary: delete user by id
  *     tags: [Users]

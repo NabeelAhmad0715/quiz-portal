@@ -5,10 +5,10 @@ const OptionController = require('../controllers').option;
 
 /* Options Router */
 router.get('/', OptionController.index);
-router.get('/:id', OptionController.show);
-router.post('/', OptionController.store);
-router.put('/:id', OptionController.update);
-router.delete('/:id', OptionController.delete);
+router.get('/:id/show', OptionController.show);
+router.post('/create', OptionController.store);
+router.put('/:id/update', OptionController.update);
+router.delete('/:id/delete', OptionController.delete);
 module.exports = router;
 
 /**
@@ -70,7 +70,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/question-banks/{question_bank_id}/questions/{question_id}/options/{id}:
+ * /api/question-banks/{question_bank_id}/questions/{question_id}/options/{id}/show:
  *   get:
  *     summary: get option by id
  *     tags: [Options]
@@ -135,7 +135,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/question-banks/{question_bank_id}/questions/{question_id}/options:
+ * /api/question-banks/{question_bank_id}/questions/{question_id}/options/create:
  *   post:
  *     summary: add option
  *     tags: [Options]
@@ -196,7 +196,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/question-banks/{question_bank_id}/questions/{question_id}/options/{id}:
+ * /api/question-banks/{question_bank_id}/questions/{question_id}/options/{id}/update:
  *   put:
  *     summary: update option by id
  *     tags: [Options]
@@ -256,7 +256,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/question-banks/{question_bank_id}/questions/{question_id}/options/{id}:
+ * /api/question-banks/{question_bank_id}/questions/{question_id}/options/{id}/create:
  *   delete:
  *     summary: delete option by id
  *     tags: [Options]

@@ -5,10 +5,10 @@ const QuestionBankController = require('../controllers').questionBank;
 
 /* question Bank Router */
 router.get('/', QuestionBankController.index);
-router.get('/:id', QuestionBankController.show);
-router.post('/', QuestionBankController.store);
-router.put('/:id', QuestionBankController.update);
-router.delete('/:id', QuestionBankController.delete);
+router.get('/:id/show', QuestionBankController.show);
+router.post('/create', QuestionBankController.store);
+router.put('/:id/update', QuestionBankController.update);
+router.delete('/:id/delete', QuestionBankController.delete);
 module.exports = router;
 
 /**
@@ -64,7 +64,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/user/{user_id}/question-banks/{id}:
+ * /api/user/{user_id}/question-banks/{id}/show:
  *   get:
  *     summary: get question Bank by id
  *     tags: [Question Banks]
@@ -123,7 +123,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/user/{user_id}/question-banks:
+ * /api/user/{user_id}/question-banks/create:
  *   post:
  *     summary: add question Bank
  *     tags: [Question Banks]
@@ -176,7 +176,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/user/{user_id}/question-banks/{id}:
+ * /api/user/{user_id}/question-banks/{id}/update:
  *   put:
  *     summary: update question Bank by id
  *     tags: [Question Banks]
@@ -231,7 +231,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/user/{user_id}/question-banks/{id}:
+ * /api/user/{user_id}/question-banks/{id}/delete:
  *   delete:
  *     summary: delete question bank by id
  *     tags: [Question Banks]

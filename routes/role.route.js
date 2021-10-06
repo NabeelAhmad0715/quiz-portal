@@ -5,10 +5,10 @@ const RolesController = require('../controllers').roles;
 
 /* Route Router */
 router.get('/', RolesController.index);
-router.get('/:id', RolesController.show);
-router.post('/', RolesController.store);
-router.put('/:id', RolesController.update);
-router.delete('/:id', RolesController.delete);
+router.get('/:id/show', RolesController.show);
+router.post('/create', RolesController.store);
+router.put('/:id/update', RolesController.update);
+router.delete('/:id/delete', RolesController.delete);
 module.exports = router;
 
 /**
@@ -40,7 +40,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/roles/{id}:
+ * /api/roles/{id}/show:
  *   get:
  *     summary: get role by id
  *     tags: [Roles]
@@ -85,7 +85,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/roles:
+ * /api/roles/create:
  *   post:
  *     summary: add role
  *     tags: [Roles]
@@ -127,7 +127,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/roles/{id}:
+ * /api/roles/{id}/update:
  *   put:
  *     summary: update role by id
  *     tags: [Roles]
@@ -171,7 +171,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/roles/{id}:
+ * /api/roles/{id}/delete:
  *   delete:
  *     summary: delete role by id
  *     tags: [Roles]

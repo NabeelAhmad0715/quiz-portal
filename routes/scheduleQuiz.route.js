@@ -5,10 +5,10 @@ const ScheduleQuizController = require('../controllers').scheduleQuiz;
 
 /* Schedule Quiz Router */
 router.get('/', ScheduleQuizController.index);
-router.get('/:id', ScheduleQuizController.show);
-router.post('/', ScheduleQuizController.store);
-router.put('/:id', ScheduleQuizController.update);
-router.delete('/:id', ScheduleQuizController.delete);
+router.get('/:id/show', ScheduleQuizController.show);
+router.post('/create', ScheduleQuizController.store);
+router.put('/:id/update', ScheduleQuizController.update);
+router.delete('/:id/delete', ScheduleQuizController.delete);
 module.exports = router;
 
 /**
@@ -70,7 +70,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/users/{user_id}/question-banks/{question_bank_id}/schedule-quizzes/{id}:
+ * /api/users/{user_id}/question-banks/{question_bank_id}/schedule-quizzes/{id}/show:
  *   get:
  *     summary: get schedule Quiz by id
  *     tags: [Schedule Quizzes]
@@ -135,7 +135,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/users/{user_id}/question-banks/{question_bank_id}/schedule-quizzes:
+ * /api/users/{user_id}/question-banks/{question_bank_id}/schedule-quizzes/create:
  *   post:
  *     summary: add schedule Quiz
  *     tags: [Schedule Quizzes]
@@ -196,7 +196,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/users/{user_id}/question-banks/{question_bank_id}/schedule-quizzes/{id}:
+ * /api/users/{user_id}/question-banks/{question_bank_id}/schedule-quizzes/{id}/update:
  *   put:
  *     summary: update schedule Quiz by id
  *     tags: [Schedule Quizzes]
@@ -261,7 +261,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/users/{user_id}/question-banks/{question_bank_id}/schedule-quizzes/{id}:
+ * /api/users/{user_id}/question-banks/{question_bank_id}/schedule-quizzes/{id}/delete:
  *   delete:
  *     summary: delete schedule Quiz by id
  *     tags: [Schedule Quizzes]
