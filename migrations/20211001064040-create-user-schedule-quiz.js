@@ -1,19 +1,19 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('student_schedule_quizzes', {
+    await queryInterface.createTable('user_schedule_quizzes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      student_id: {
+      user_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
         foreignKey: true,
         references: {
           // Required field
-          model: 'students',
+          model: 'users',
           key: 'id',
         },
         onDelete: 'cascade',
@@ -32,6 +32,6 @@ module.exports = {
     });
   },
   down: async (queryInterface) => {
-    await queryInterface.dropTable('student_schedule_quizzes');
+    await queryInterface.dropTable('user_schedule_quizzes');
   },
 };

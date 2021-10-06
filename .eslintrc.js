@@ -16,5 +16,6 @@ module.exports = {
     'max-classes-per-file': ['error', 2],
     'global-require': 'off',
     'import/no-dynamic-require': 'off',
+    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
   },
 };

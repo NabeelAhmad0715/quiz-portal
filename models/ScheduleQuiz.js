@@ -13,14 +13,9 @@ module.exports = (sequelize, DataTypes) => {
         as: 'schedule_quizzes',
       });
 
-      ScheduleQuiz.belongsTo(models.Teacher, {
-        foreignKey: 'teacher_id',
-        as: 'schedule_quizzes',
-      });
-
-      ScheduleQuiz.belongsToMany(models.Student, {
-        through: 'studentScheduleQuiz',
-        as: 'students',
+      ScheduleQuiz.belongsToMany(models.User, {
+        through: 'userScheduleQuiz',
+        as: 'users',
         foreignKey: 'schedule_quiz_id',
       });
     }
