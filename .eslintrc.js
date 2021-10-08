@@ -5,9 +5,7 @@ module.exports = {
   },
   extends: ['airbnb-base', 'eslint:recommended'],
   plugins: ['prettier'],
-  parserOptions: {
-    ecmaVersion: 12,
-  },
+  parserOptions: { ecmaVersion: 12 },
   rules: {
     'prettier/prettier': 'error',
     'no-console': 'off',
@@ -16,12 +14,7 @@ module.exports = {
     'max-classes-per-file': ['error', 2],
     'global-require': 'off',
     'import/no-dynamic-require': 'off',
-    'import/no-extraneous-dependencies': [
-      'error',
-      {
-        devDependencies: true,
-      },
-    ],
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
   },
 };

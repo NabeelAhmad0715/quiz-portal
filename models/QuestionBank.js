@@ -19,19 +19,20 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       QuestionBank.belongsTo(models.User, {
-        foreignKey: 'question_bank_id',
+        foreignKey: 'user_id',
         as: 'users',
       });
     }
   }
   QuestionBank.init(
     {
-      teacher_id: DataTypes.INTEGER,
+      user_id: DataTypes.INTEGER,
       name: DataTypes.STRING,
       type: DataTypes.STRING,
     },
     {
       sequelize,
+      tableName: 'question_banks',
       modelName: 'QuestionBank',
     },
   );

@@ -22,15 +22,15 @@ const defaultRoutes = [
     route: roleRoute,
   },
   {
-    path: '/api/user/{user}/question-banks',
+    path: '/api/question-banks',
     route: questionBankRoute,
   },
   {
-    path: '/api/question-banks/{questionBank}/questions',
+    path: '/api/question-banks/questions',
     route: questionRoute,
   },
   {
-    path: '/api/question-banks/{questionBank}/questions/{question}/options',
+    path: '/api/question-banks/questions/options',
     route: optionRoute,
   },
   {

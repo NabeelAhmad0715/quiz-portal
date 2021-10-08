@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       User.belongsToMany(models.ScheduleQuiz, {
         through: 'UserScheduleQuiz',
-        as: 'schedule_quizzes',
         foreignKey: 'user_id',
+        as: 'schedules_quizzes',
       });
 
       User.hasMany(models.UserQuizAttempt, {
@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       User.hasMany(models.QuestionBank, {
-        foreignKey: 'question_bank_id',
+        foreignKey: 'user_id',
         as: 'question_banks',
       });
 
@@ -34,10 +34,12 @@ module.exports = (sequelize, DataTypes) => {
     {
       name: DataTypes.STRING,
       email: DataTypes.STRING,
+      role_id: DataTypes.INTEGER,
       password: DataTypes.STRING,
     },
     {
       sequelize,
+      tableName: 'users',
       modelName: 'User',
     },
   );
