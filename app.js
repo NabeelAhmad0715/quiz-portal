@@ -6,12 +6,25 @@ require('dotenv').config();
 
 const port = process.env.PORT;
 
+// app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res) => {
   res.status(404).send({ error: 'Not found' });
 });
+
+// error handler
+app.use((err, req, res) => {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.status(err.status || 500).send({ error: err });
+});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

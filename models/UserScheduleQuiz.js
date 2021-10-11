@@ -7,8 +7,15 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(_models) {
-      // define association here
+    static associate(models) {
+      UserScheduleQuiz.belongsTo(models.User, {
+        foreignKey: 'user_id',
+        as: 'users',
+      });
+      UserScheduleQuiz.belongsTo(models.ScheduleQuiz, {
+        foreignKey: 'schedule_quiz_id',
+        as: 'schedule_quizzes',
+      });
     }
   }
   UserScheduleQuiz.init(
@@ -16,10 +23,11 @@ module.exports = (sequelize, DataTypes) => {
       user_id: DataTypes.INTEGER,
       schedule_quiz_id: DataTypes.INTEGER,
     },
-    { timestamps: false },
     {
       sequelize,
+      tableName: 'user_schedule_quizzes',
       modelName: 'UserScheduleQuiz',
+      timestamps: false,
     },
   );
   return UserScheduleQuiz;

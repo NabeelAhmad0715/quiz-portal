@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Question.belongsTo(models.QuestionBank, {
         foreignKey: 'question_bank_id',
-        as: 'questions',
+        as: 'question_banks',
       });
 
       Question.hasMany(models.Option, {
@@ -29,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
+      tableName: 'questions',
       modelName: 'Question',
     },
   );

@@ -1,19 +1,25 @@
 const express = require('express');
 
 const router = express.Router();
-const ScheduleQuizController = require('../controllers').scheduleQuiz;
+const {
+  index,
+  show,
+  store,
+  update,
+  destroy,
+} = require('../controllers/scheduleQuiz.controller');
 
-/* Schedule Quiz Router */
-router.get('/', ScheduleQuizController.index);
-router.get('/:id/show', ScheduleQuizController.show);
-router.post('/create', ScheduleQuizController.store);
-router.put('/:id/update', ScheduleQuizController.update);
-router.delete('/:id/delete', ScheduleQuizController.delete);
+/* Route Router */
+router.get('/', index);
+router.get('/:id/show', show);
+router.post('/create', store);
+router.put('/:id/update', update);
+router.delete('/:id/delete', destroy);
 module.exports = router;
 
 /**
  * @swagger
- * /api/users/{user_id}/question-banks/{question_bank_id}/schedule-quizzes:
+ * /api/schedule-quizzes:
  *   get:
  *     summary: all schedule Quizzes
  *     tags: [Schedule Quizzes]
@@ -70,7 +76,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/users/{user_id}/question-banks/{question_bank_id}/schedule-quizzes/{id}/show:
+ * /api/schedule-quizzes/{id}/show:
  *   get:
  *     summary: get schedule Quiz by id
  *     tags: [Schedule Quizzes]
@@ -135,7 +141,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/users/{user_id}/question-banks/{question_bank_id}/schedule-quizzes/create:
+ * /api/schedule-quizzes/create:
  *   post:
  *     summary: add schedule Quiz
  *     tags: [Schedule Quizzes]
@@ -196,7 +202,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/users/{user_id}/question-banks/{question_bank_id}/schedule-quizzes/{id}/update:
+ * /api/schedule-quizzes/{id}/update:
  *   put:
  *     summary: update schedule Quiz by id
  *     tags: [Schedule Quizzes]
@@ -261,7 +267,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/users/{user_id}/question-banks/{question_bank_id}/schedule-quizzes/{id}/delete:
+ * /api/schedule-quizzes/{id}/delete:
  *   delete:
  *     summary: delete schedule Quiz by id
  *     tags: [Schedule Quizzes]
