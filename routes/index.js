@@ -7,8 +7,8 @@ const optionRoute = require('./option.route');
 const scheduleQuizRoute = require('./scheduleQuiz.route');
 const userScheduleQuizRoute = require('./userScheduleQuiz.route');
 const userQuizAttemptRoute = require('./userQuizAttempt.route');
-const docsRoute = require('./docs.route');
 const config = require('../config/config.json');
+// const docsRoute = require('./docs.route');
 
 const router = express.Router();
 
@@ -51,19 +51,19 @@ defaultRoutes.forEach((route) => {
   router.use(route.path, route.route);
 });
 
-if (process.env.ENVIRONMENT === 'development') {
-  const devRoutes = [
-    // routes available only in development mode
-    {
-      path: '/api/swagger',
-      route: docsRoute,
-    },
-  ];
+// if (process.env.ENVIRONMENT === 'development') {
+//   const devRoutes = [
+//     // routes available only in development mode
+//     {
+//       path: '/api/swagger',
+//       route: docsRoute,
+//     },
+//   ];
 
-  devRoutes.forEach((route) => {
-    router.use(route.path, route.route);
-  });
-}
+//   devRoutes.forEach((route) => {
+//     router.use(route.path, route.route);
+//   });
+// }
 
 router.get('/', (req, res) => {
   res.writeHead(200, { 'content-type': 'text/html' });
