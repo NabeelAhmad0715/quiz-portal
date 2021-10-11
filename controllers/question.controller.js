@@ -65,12 +65,13 @@ const store = async (req, res, _next) => {
   try {
     const {
       description,
+      question: text,
       tags,
       marks,
       question_bank_id: questionBankId,
     } = req.body;
     const question = await Question.create({
-      question: req.body.question,
+      question: text,
       description,
       tags,
       marks,
@@ -84,7 +85,15 @@ const store = async (req, res, _next) => {
 
 const update = async (req, res, _next) => {
   try {
-    const question = await Question.findByPk(req.body.id, {
+    const {
+      description,
+      question: text,
+      tags,
+      marks,
+      id,
+      question_bank_id: questionBankId,
+    } = req.body;
+    const question = await Question.findByPk(id, {
       include: [
         {
           model: QuestionBank,
@@ -107,11 +116,11 @@ const update = async (req, res, _next) => {
       });
     }
     await question.update({
-      question: req.body.question || question.question,
-      description: req.body.description || question.description,
-      tags: req.body.tags || question.tags,
-      marks: req.body.marks || question.marks,
-      question_bank_id: req.body.question_bank_id || question.question_bank_id,
+      question: text || question.question,
+      description: description || question.description,
+      tags: tags || question.tags,
+      marks: marks || question.marks,
+      question_bank_id: questionBankId || question.question_bank_id,
     });
     return res.status(200).json(question);
   } catch (err) {
