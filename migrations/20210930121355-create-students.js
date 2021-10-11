@@ -19,7 +19,6 @@ module.exports = {
       role_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        unique: true,
       },
       password: {
         allowNull: false,

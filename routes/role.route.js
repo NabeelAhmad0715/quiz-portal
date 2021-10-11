@@ -1,14 +1,20 @@
 const express = require('express');
 
 const router = express.Router();
-const RolesController = require('../controllers').role;
+const {
+  index,
+  show,
+  store,
+  update,
+  destroy,
+} = require('../controllers/role.controller');
 
 /* Route Router */
-router.get('/', RolesController.index);
-router.get('/:id/show', RolesController.show);
-router.post('/create', RolesController.store);
-router.put('/:id/update', RolesController.update);
-router.delete('/:id/delete', RolesController.delete);
+router.get('/', index);
+router.get('/:id/show', show);
+router.post('/create', store);
+router.put('/:id/update', update);
+router.delete('/:id/delete', destroy);
 module.exports = router;
 
 /**

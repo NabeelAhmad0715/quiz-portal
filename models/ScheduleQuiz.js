@@ -14,21 +14,22 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       ScheduleQuiz.belongsToMany(models.User, {
-        through: 'userScheduleQuiz',
-        as: 'users',
+        through: 'UserScheduleQuiz',
         foreignKey: 'schedule_quiz_id',
+        as: 'users',
       });
     }
   }
   ScheduleQuiz.init(
     {
-      teacher_id: DataTypes.INTEGER,
+      user_id: DataTypes.INTEGER,
       question_bank_id: DataTypes.INTEGER,
       start_dateTime: DataTypes.DATE,
       end_dateTime: DataTypes.DATE,
     },
     {
       sequelize,
+      tableName: 'schedule_quizzes',
       modelName: 'ScheduleQuiz',
     },
   );

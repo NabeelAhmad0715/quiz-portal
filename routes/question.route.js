@@ -1,19 +1,25 @@
 const express = require('express');
 
 const router = express.Router();
-const QuestionController = require('../controllers').question;
+const {
+  index,
+  show,
+  store,
+  update,
+  destroy,
+} = require('../controllers/question.controller');
 
-/* Questions Router */
-router.get('/', QuestionController.index);
-router.get('/:id/show', QuestionController.show);
-router.post('/create', QuestionController.store);
-router.put('/:id/update', QuestionController.update);
-router.delete('/:id/delete', QuestionController.delete);
+/* Route Router */
+router.get('/', index);
+router.get('/:id/show', show);
+router.post('/create', store);
+router.put('/:id/update', update);
+router.delete('/:id/delete', destroy);
 module.exports = router;
 
 /**
  * @swagger
- * /api/question-banks/{question_bank_id}/questions:
+ * /api/question-banks/questions:
  *   get:
  *     summary: all questions
  *     tags: [Questions]
@@ -62,7 +68,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/question-banks/{question_bank_id}/questions/{id}/show:
+ * /api/question-banks/questions/{id}/show:
  *   get:
  *     summary: get question by id
  *     tags: [Questions]
@@ -119,7 +125,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/question-banks/{question_bank_id}/questions/create:
+ * /api/question-banks/questions/create:
  *   post:
  *     summary: add question
  *     tags: [Questions]
@@ -179,7 +185,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/question-banks/{question_bank_id}/questions/{id}/update:
+ * /api/question-banks/questions/{id}/update:
  *   put:
  *     summary: update question by id
  *     tags: [Questions]
@@ -235,7 +241,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/question-banks/{question_bank_id}/questions/{id}/delete:
+ * /api/question-banks/questions/{id}/delete:
  *   delete:
  *     summary: delete question by id
  *     tags: [Questions]

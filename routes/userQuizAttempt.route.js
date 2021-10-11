@@ -1,19 +1,25 @@
 const express = require('express');
 
 const router = express.Router();
-const UserQuizAttemptController = require('../controllers/userQuizAttempt.controller');
+const {
+  index,
+  show,
+  store,
+  update,
+  destroy,
+} = require('../controllers/userQuizAttempt.controller');
 
-/* User Quiz Attempts Router */
-router.get('/', UserQuizAttemptController.index);
-router.get('/:id/show', UserQuizAttemptController.show);
-router.post('/create', UserQuizAttemptController.store);
-router.put('/:id/update', UserQuizAttemptController.update);
-router.delete('/:id/delete', UserQuizAttemptController.delete);
+/* Route Router */
+router.get('/', index);
+router.get('/:id/show', show);
+router.post('/create', store);
+router.put('/:id/update', update);
+router.delete('/:id/delete', destroy);
 module.exports = router;
 
 /**
  * @swagger
- * /api/users/{user_id}/user-quiz-attempts:
+ * /api/user-quiz-attempts:
  *   get:
  *     summary: all user quiz attempts
  *     tags: [User Quiz Attempts]
@@ -62,7 +68,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/users/{user_id}/user-quiz-attempts/{id}/show:
+ * /api/user-quiz-attempts/{id}/show:
  *   get:
  *     summary: get user quiz attempt by id
  *     tags: [User Quiz Attempts]
@@ -119,7 +125,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/users/{user_id}/user-quiz-attempts/create:
+ * /api/user-quiz-attempts/create:
  *   post:
  *     summary: add user quiz attempt
  *     tags: [User Quiz Attempts]
@@ -180,7 +186,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/users/{user_id}/user-quiz-attempts/{id}/update:
+ * /api/user-quiz-attempts/{id}/update:
  *   put:
  *     summary: update user quiz attempts by id
  *     tags: [User Quiz Attempts]
@@ -243,7 +249,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/users/{user_id}/user-quiz-attempts/{id}/delete:
+ * /api/user-quiz-attempts/{id}/delete:
  *   delete:
  *     summary: delete user quiz attempts by id
  *     tags: [User Quiz Attempts]

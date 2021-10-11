@@ -1,19 +1,24 @@
 const express = require('express');
 
 const router = express.Router();
-const UserScheduleQuizController = require('../controllers/userScheduleQuiz.controller');
+const {
+  index,
+  show,
+  store,
+  update,
+  destroy,
+} = require('../controllers/userScheduleQuiz.controller');
 
-/* Schedule Quiz Router */
-router.get('/', UserScheduleQuizController.index);
-router.get('/:id/show', UserScheduleQuizController.show);
-router.post('/create', UserScheduleQuizController.store);
-router.put('/:id/update', UserScheduleQuizController.update);
-router.delete('/:id/delete', UserScheduleQuizController.delete);
+/* Route Router */
+router.get('/', index);
+router.get('/:id/show', show);
+router.post('/create', store);
+router.put('/:id/update', update);
+router.delete('/:id/delete', destroy);
 module.exports = router;
-
 /**
  * @swagger
- * /api/schedule-quizzes/{schedule_quiz_id}/users/{user_id}/user-schedule-quizzes:
+ * /api/user-schedule-quizzes:
  *   get:
  *     summary: all user schedule quizzes
  *     tags: [User Schedule Quizzes]
@@ -70,7 +75,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/schedule-quizzes/{schedule_quiz_id}/users/{user_id}/schedule-quizzes/{id}/show:
+ * /api/schedule-quizzes/{id}/show:
  *   get:
  *     summary: get user schedule Quiz by id
  *     tags: [User Schedule Quizzes]
@@ -135,7 +140,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/schedule-quizzes/{schedule_quiz_id}/users/{user_id}/user-schedule-quizzes/create:
+ * /api/user-schedule-quizzes/create:
  *   post:
  *     summary: add schedule Quiz
  *     tags: [User Schedule Quizzes]
@@ -188,7 +193,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/schedule-quizzes/{schedule_quiz_id}/users/{user_id}/schedule-quizzes/{id}/update:
+ * /api/schedule-quizzes/{id}/update:
  *   put:
  *     summary: update user schedule Quiz by id
  *     tags: [User Schedule Quizzes]
@@ -245,7 +250,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/schedule-quizzes/{schedule_quiz_id}/users/{user_id}/schedule-quizzes/{id}/delete:
+ * /api/schedule-quizzes/{id}/delete:
  *   delete:
  *     summary: delete user schedule Quiz by id
  *     tags: [User Schedule Quizzes]

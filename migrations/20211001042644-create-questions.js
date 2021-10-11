@@ -26,6 +26,7 @@ module.exports = {
         type: Sequelize.TEXT,
       },
       tags: {
+        allowNull: false,
         type: Sequelize.TEXT,
       },
       marks: {

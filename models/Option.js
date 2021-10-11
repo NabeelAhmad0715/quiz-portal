@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Option.belongsTo(models.Question, {
         foreignKey: 'question_id',
-        as: 'options',
+        as: 'questions',
       });
     }
   }
@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
+      tableName: 'options',
       modelName: 'Option',
     },
   );
