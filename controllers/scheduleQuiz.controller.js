@@ -80,7 +80,14 @@ const store = async (req, res, _next) => {
 
 const update = async (req, res, _next) => {
   try {
-    const scheduleQuiz = await ScheduleQuiz.findByPk(req.body.id, {
+    const {
+      start_dateTime: startDateTime,
+      end_dateTime: endDateTime,
+      question_bank_id: questionBankId,
+      user_id: userId,
+      id,
+    } = await req.body;
+    const scheduleQuiz = await ScheduleQuiz.findByPk(id, {
       include: [
         {
           model: User,
@@ -103,11 +110,10 @@ const update = async (req, res, _next) => {
       });
     }
     await scheduleQuiz.update({
-      start_dateTime: req.body.start_dateTime || scheduleQuiz.start_dateTime,
-      end_dateTime: req.body.end_dateTime || scheduleQuiz.end_dateTime,
-      question_bank_id:
-        req.body.question_bank_id || scheduleQuiz.question_bank_id,
-      user_id: req.body.user_id || scheduleQuiz.user_id,
+      start_dateTime: startDateTime || scheduleQuiz.start_dateTime,
+      end_dateTime: endDateTime || scheduleQuiz.end_dateTime,
+      question_bank_id: questionBankId || scheduleQuiz.question_bank_id,
+      user_id: userId || scheduleQuiz.user_id,
     });
     return res.status(200).json(scheduleQuiz);
   } catch (err) {

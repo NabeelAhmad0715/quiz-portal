@@ -79,6 +79,7 @@ const store = async (req, res, _next) => {
 
 const update = async (req, res, _next) => {
   try {
+    const { name, type, user_id: userId } = req.body;
     const questionBank = await QuestionBank.findByPk(req.body.id, {
       include: [
         {
@@ -102,9 +103,9 @@ const update = async (req, res, _next) => {
       });
     }
     await questionBank.update({
-      name: req.body.name || QuestionBank.name,
-      type: req.body.type || QuestionBank.type,
-      user_id: req.body.user_id || QuestionBank.user_id,
+      name: name || QuestionBank.name,
+      type: type || QuestionBank.type,
+      user_id: userId || QuestionBank.user_id,
     });
     return res.status(200).json(questionBank);
   } catch (err) {

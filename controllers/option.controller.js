@@ -66,7 +66,13 @@ const store = async (req, res, _next) => {
 
 const update = async (req, res, _next) => {
   try {
-    const option = await Option.findByPk(req.body.id, {
+    const {
+      id,
+      is_correct: isCorrect,
+      text,
+      question_id: QuestionId,
+    } = req.body;
+    const option = await Option.findByPk(id, {
       include: [
         {
           model: Question,
@@ -84,9 +90,9 @@ const update = async (req, res, _next) => {
       });
     }
     await Option.update({
-      is_correct: req.body.is_correct || option.is_correct,
-      text: req.body.text || option.text,
-      question_id: req.body.question_id || option.question_id,
+      is_correct: isCorrect || option.is_correct,
+      text: text || option.text,
+      question_id: QuestionId || option.question_id,
     });
     return res.status(200).json(option);
   } catch (err) {

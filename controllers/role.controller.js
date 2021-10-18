@@ -57,7 +57,8 @@ const store = async (req, res, _next) => {
 
 const update = async (req, res, _next) => {
   try {
-    const role = await Role.findByPk(req.body.id, {
+    const { name, id } = req.body;
+    const role = await Role.findByPk(id, {
       include: [
         {
           model: User,
@@ -71,7 +72,7 @@ const update = async (req, res, _next) => {
       });
     }
     await role.update({
-      name: req.body.name || User.name,
+      name: name || User.name,
     });
     return res.status(200).json(role);
   } catch (err) {

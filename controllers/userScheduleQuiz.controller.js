@@ -70,7 +70,8 @@ const store = async (req, res, _next) => {
 
 const update = async (req, res, _next) => {
   try {
-    const userScheduleQuiz = await UserScheduleQuiz.findByPk(req.body.id, {
+    const { schedule_quiz_id: scheduleQuizId, user_id: userId, id } = req.body;
+    const userScheduleQuiz = await UserScheduleQuiz.findByPk(id, {
       include: [
         {
           model: User,
@@ -93,9 +94,8 @@ const update = async (req, res, _next) => {
       });
     }
     await userScheduleQuiz.update({
-      schedule_quiz_id:
-        req.body.schedule_quiz_id || userScheduleQuiz.schedule_quiz_id,
-      user_id: req.body.user_id || userScheduleQuiz.user_id,
+      schedule_quiz_id: scheduleQuizId || userScheduleQuiz.schedule_quiz_id,
+      user_id: userId || userScheduleQuiz.user_id,
     });
     return res.status(200).json(userScheduleQuiz);
   } catch (err) {

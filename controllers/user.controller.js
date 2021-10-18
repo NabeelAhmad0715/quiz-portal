@@ -80,6 +80,7 @@ const store = async (req, res, _next) => {
 
 const update = async (req, res, _next) => {
   try {
+    const { name, email, role_id: roleId } = await req.body;
     const user = await User.findByPk(req.body.id, {
       include: [
         {
@@ -94,9 +95,9 @@ const update = async (req, res, _next) => {
       });
     }
     await user.update({
-      name: req.body.name || User.name,
-      email: req.body.email || User.email,
-      role_id: req.body.role_id || User.role_id,
+      name: name || User.name,
+      email: email || User.email,
+      role_id: roleId || User.role_id,
     });
     return res.status(200).json(user);
   } catch (err) {

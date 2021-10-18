@@ -71,7 +71,15 @@ const store = async (req, res, _next) => {
 
 const update = async (req, res, _next) => {
   try {
-    const userQuizAttempt = await UserQuizAttempt.findByPk(req.body.id, {
+    const {
+      quiz_id: quizId,
+      user_id: userId,
+      obtained_marks: obtainedMarks,
+      has_passed: hasPassed,
+      is_finished: isFinished,
+      id,
+    } = req.body;
+    const userQuizAttempt = await UserQuizAttempt.findByPk(id, {
       include: [
         {
           model: User,
@@ -89,11 +97,11 @@ const update = async (req, res, _next) => {
       });
     }
     await UserQuizAttempt.update({
-      quiz_id: req.body.quiz_id || userQuizAttempt.quiz_id,
-      user_id: req.body.user_id || userQuizAttempt.user_id,
-      obtained_marks: req.body.obtained_marks || userQuizAttempt.obtained_marks,
-      has_passed: req.body.has_passed || userQuizAttempt.has_passed,
-      is_finished: req.body.is_finished || userQuizAttempt.is_finished,
+      quiz_id: quizId || userQuizAttempt.quiz_id,
+      user_id: userId || userQuizAttempt.user_id,
+      obtained_marks: obtainedMarks || userQuizAttempt.obtained_marks,
+      has_passed: hasPassed || userQuizAttempt.has_passed,
+      is_finished: isFinished || userQuizAttempt.is_finished,
     });
     return res.status(200).json(userQuizAttempt);
   } catch (err) {
