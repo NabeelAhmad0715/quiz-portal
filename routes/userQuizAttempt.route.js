@@ -8,13 +8,14 @@ const {
   update,
   destroy,
 } = require('../controllers/userQuizAttempt.controller');
+const { checkRole, userAuth } = require('../utils/Auth');
 
 /* Route Router */
-router.get('/', index);
-router.get('/:id/show', show);
-router.post('/create', store);
-router.put('/:id/update', update);
-router.delete('/:id/delete', destroy);
+router.get('/', userAuth, checkRole(['student']), index);
+router.get('/:id/show', userAuth, checkRole(['student']), show);
+router.post('/create', userAuth, checkRole(['student']), store);
+router.put('/:id/update', userAuth, checkRole(['student']), update);
+router.delete('/:id/delete', userAuth, checkRole(['student']), destroy);
 module.exports = router;
 
 /**
