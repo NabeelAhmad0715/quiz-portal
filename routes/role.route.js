@@ -8,13 +8,14 @@ const {
   update,
   destroy,
 } = require('../controllers/role.controller');
+const { checkRole, userAuth } = require('../utils/Auth');
 
 /* Route Router */
-router.get('/', index);
-router.get('/:id/show', show);
-router.post('/create', store);
-router.put('/:id/update', update);
-router.delete('/:id/delete', destroy);
+router.get('/', userAuth, checkRole(['admin']), index);
+router.get('/:id/show', userAuth, checkRole(['admin']), show);
+router.post('/create', userAuth, checkRole(['admin']), store);
+router.put('/:id/update', userAuth, checkRole(['admin']), update);
+router.delete('/:id/delete', userAuth, checkRole(['admin']), destroy);
 module.exports = router;
 
 /**
