@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const { User, Role } = require('../models');
 const { UserQuizAttempt, QuestionBank } = require('../models');
 
@@ -30,6 +31,9 @@ const index = async (_req, res, _next) => {
         ],
         [{ model: QuestionBank, as: 'question_banks' }, 'createdAt', 'DESC'],
       ],
+      attributes: {
+        exclude: ['password'],
+      },
     });
     return res.status(200).json(users);
   } catch (err) {
@@ -79,6 +83,40 @@ const changePassword = async (req, res, _next) => {
   }
 };
 
+const generateAccessToken = (user) => {
+  return jwt.sign(
+    {
+      user_id: user.id,
+      role_id: user.role_id,
+      email: user.email,
+    },
+    process.env.SECRET,
+    { expiresIn: '7 days' },
+  );
+};
+const login = async (req, res, _next) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ where: { email } });
+    const match = await bcrypt.compare(password, user.password);
+    if (match) {
+      const token = generateAccessToken(user);
+      const result = {
+        name: user.name,
+        email: user.email,
+        role: user.role_id,
+        token: `Bearer ${token}`,
+        expiresIn: 1,
+      };
+      return res.status(200).json(result);
+    }
+    return res.status(400).json({ message: 'Invalid Password' });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json(err);
+  }
+};
+
 const show = async (req, res, _next) => {
   try {
     const user = await User.findByPk(req.params.id, {
@@ -112,6 +150,25 @@ const store = async (req, res, _next) => {
         null,
       ),
       role_id: req.body.role_id,
+    });
+    return res.status(200).json(user);
+  } catch (err) {
+    return res.status(400).json(err);
+  }
+};
+
+const register = async (req, res, _next) => {
+  try {
+    const { name, email, role_id: roleId } = await req.body;
+    const user = await User.create({
+      name,
+      email,
+      password: bcrypt.hashSync(
+        req.body.password,
+        bcrypt.genSaltSync(16),
+        null,
+      ),
+      roleId,
     });
     return res.status(200).json(user);
   } catch (err) {
@@ -168,4 +225,6 @@ module.exports = {
   update,
   destroy,
   changePassword,
+  register,
+  login,
 };
