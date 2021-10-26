@@ -10,15 +10,26 @@ const {
   destroy,
   changePassword,
 } = require('../controllers/user.controller');
+const { checkRole, userAuth } = require('../utils/Auth');
 
 /* Route Router */
-router.get('/', index);
-router.get('/:id/show', show);
-router.get('/:id/show', show);
-router.put('/:id/change-password', changePassword);
-router.post('/create', store);
-router.put('/:id/update', update);
-router.delete('/:id/delete', destroy);
+router.get('/', userAuth, checkRole(['admin', 'teacher']), index);
+router.get('/:id/show', userAuth, checkRole(['admin', 'teacher']), show);
+router.get('/:id/show', userAuth, checkRole(['admin', 'teacher']), show);
+router.put(
+  '/:id/change-password',
+  userAuth,
+  checkRole(['admin', 'teacher']),
+  changePassword,
+);
+router.post('/create', userAuth, checkRole(['admin', 'teacher']), store);
+router.put('/:id/update', userAuth, checkRole(['admin', 'teacher']), update);
+router.delete(
+  '/:id/delete',
+  userAuth,
+  checkRole(['admin', 'teacher']),
+  destroy,
+);
 module.exports = router;
 
 /**
