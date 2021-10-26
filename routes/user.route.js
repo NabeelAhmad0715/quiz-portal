@@ -5,26 +5,20 @@ const router = express.Router();
 const {
   index,
   show,
-  register,
+  store,
   update,
   destroy,
-  login,
+  changePassword,
 } = require('../controllers/user.controller');
 
-const { checkRole, userAuth } = require('../utils/Auth');
-
 /* Route Router */
-router.get('/', userAuth, checkRole(['teacher', 'admin']), index);
-router.post('/login', login);
-router.get('/:id/show', userAuth, checkRole(['teacher', 'admin']), show);
-router.post('/signup', userAuth, register);
-router.put('/:id/update', userAuth, checkRole(['teacher', 'admin']), update);
-router.delete(
-  '/:id/delete',
-  userAuth,
-  checkRole(['teacher', 'admin']),
-  destroy,
-);
+router.get('/', index);
+router.get('/:id/show', show);
+router.get('/:id/show', show);
+router.put('/:id/change-password', changePassword);
+router.post('/create', store);
+router.put('/:id/update', update);
+router.delete('/:id/delete', destroy);
 module.exports = router;
 
 /**

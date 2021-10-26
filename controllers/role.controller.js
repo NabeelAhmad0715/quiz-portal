@@ -24,7 +24,7 @@ const index = async (_req, res, _next) => {
 
 const show = async (req, res, _next) => {
   try {
-    const role = await Role.findByPk(req.body.id, {
+    const role = await Role.findByPk(req.params.id, {
       include: [
         {
           model: User,
@@ -72,7 +72,7 @@ const update = async (req, res, _next) => {
       });
     }
     await role.update({
-      name: name || User.name,
+      name: name || role.name,
     });
     return res.status(200).json(role);
   } catch (err) {

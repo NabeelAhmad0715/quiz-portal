@@ -1,9 +1,8 @@
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const { User, Role } = require('../models');
 const { UserQuizAttempt, QuestionBank } = require('../models');
 
-const index = async (req, res, _next) => {
+const index = async (_req, res, _next) => {
   try {
     const users = await User.findAll({
       tableName: 'users',
@@ -31,9 +30,6 @@ const index = async (req, res, _next) => {
         ],
         [{ model: QuestionBank, as: 'question_banks' }, 'createdAt', 'DESC'],
       ],
-      attributes: {
-        exclude: ['password'],
-      },
     });
     return res.status(200).json(users);
   } catch (err) {
@@ -42,35 +38,41 @@ const index = async (req, res, _next) => {
   }
 };
 
-const generateAccessToken = (user) => {
-  return jwt.sign(
-    {
-      user_id: user.id,
-      role_id: user.role_id,
-      email: user.email,
-    },
-    process.env.SECRET,
-    { expiresIn: '7 days' },
-  );
-};
-
-const login = async (req, res, _next) => {
+const changePassword = async (req, res, _next) => {
   try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ where: { email } });
-    const match = await bcrypt.compare(password, user.password);
-    if (match) {
-      const token = generateAccessToken(user);
-      const result = {
-        name: user.name,
-        email: user.email,
-        role: user.role_id,
-        token: `Bearer ${token}`,
-        expiresIn: 1,
-      };
-      return res.status(200).json(result);
+    const { password, newPassword } = await req.body;
+    const user = await User.findByPk(req.body.id, {
+      include: [
+        {
+          model: Role,
+          as: 'roles',
+        },
+      ],
+    });
+    if (!user) {
+      return res.status(404).json({
+        message: 'User Not Found',
+      });
     }
-    return res.status(400).json({ message: 'Invalid Password' });
+    return await bcrypt.compare(password, user.password, (error, response) => {
+      if (error) {
+        return res.status(400).json({ message: error, success: false });
+      }
+      if (response) {
+        const hashPassword = bcrypt.hashSync(
+          newPassword,
+          bcrypt.genSaltSync(16),
+          null,
+        );
+        user.update({
+          password: hashPassword,
+        });
+        return res.status(200).json(user);
+      }
+      return res
+        .status(400)
+        .json({ message: 'Password Not Matched', success: false });
+    });
   } catch (err) {
     console.log(err);
     return res.status(400).json(err);
@@ -79,16 +81,13 @@ const login = async (req, res, _next) => {
 
 const show = async (req, res, _next) => {
   try {
-    const user = await User.findByPk(req.body.id, {
+    const user = await User.findByPk(req.params.id, {
       include: [
         {
           model: Role,
           as: 'roles',
         },
       ],
-      attributes: {
-        exclude: ['password'],
-      },
     });
     if (!user) {
       return res.status(404).json({
@@ -101,9 +100,9 @@ const show = async (req, res, _next) => {
   }
 };
 
-const register = async (req, res, _next) => {
+const store = async (req, res, _next) => {
   try {
-    const { name, email, role_id: roleId } = await req.body;
+    const { name, email } = await req.body;
     const user = await User.create({
       name,
       email,
@@ -112,7 +111,7 @@ const register = async (req, res, _next) => {
         bcrypt.genSaltSync(16),
         null,
       ),
-      roleId,
+      role_id: req.body.role_id,
     });
     return res.status(200).json(user);
   } catch (err) {
@@ -165,8 +164,8 @@ const destroy = async (req, res, _next) => {
 module.exports = {
   index,
   show,
-  register,
+  store,
   update,
   destroy,
-  login,
+  changePassword,
 };
