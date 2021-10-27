@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 const { User, Role } = require('../models');
 const { UserQuizAttempt, QuestionBank } = require('../models');
 
+const tokenList = {};
+
 const index = async (_req, res, _next) => {
   try {
     const users = await User.findAll({
@@ -173,7 +175,19 @@ const generateAccessToken = (user) => {
       email: user.email,
     },
     process.env.SECRET,
-    { expiresIn: '7 days' },
+    { expiresIn: 60 },
+  );
+};
+
+const generateRefreshToken = (user) => {
+  return jwt.sign(
+    {
+      user_id: user.id,
+    },
+    process.env.REFRESH_TOKEN_SECRET,
+    {
+      expiresIn: process.env.REFRESH_TOKEN_LIFE,
+    },
   );
 };
 
@@ -184,13 +198,18 @@ const login = async (req, res, _next) => {
     const match = await bcrypt.compare(password, user.password);
     if (match) {
       const token = generateAccessToken(user);
+      const refreshToken = generateRefreshToken(user);
       const result = {
         name: user.name,
         email: user.email,
         role: user.role_id,
         token: `Bearer ${token}`,
-        expiresIn: 1,
+        expiresIn: process.env.TOKEN_LIFE,
+        refresh: refreshToken,
+        refreshExpireIn: process.env.REFRESH_TOKEN_LIFE,
       };
+      tokenList[refreshToken] = result;
+
       return res.status(200).json(result);
     }
     return res.status(400).json({ message: 'Invalid Password' });
@@ -200,6 +219,25 @@ const login = async (req, res, _next) => {
   }
 };
 
+const token = async (req, res) => {
+  // refresh the damn token
+
+  const data = req.body;
+  // if refresh token exists
+  if (data.refreshToken && data.refreshToken in tokenList) {
+    const user = await User.findOne({ where: { email: data.email } });
+    const accessToken = `Bearer ${generateAccessToken(user)}`;
+
+    const response = {
+      accessToken,
+    };
+    // update the token in the list
+    tokenList[data.refreshToken].accessToken = accessToken;
+    res.status(200).json(response);
+  } else {
+    res.status(404).send('Invalid request');
+  }
+};
 const register = async (req, res, _next) => {
   try {
     const { name, email, role_id: roleId } = await req.body;
@@ -228,4 +266,5 @@ module.exports = {
   changePassword,
   register,
   login,
+  token,
 };

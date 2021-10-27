@@ -29,7 +29,12 @@ const index = ({roles}) => {
 }
 
 export const getStaticProps = async () => {
-    const res = await fetch(`${server}/api/roles`)
+    const res = await fetch(`${server}/api/roles`, {
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJyb2xlX2lkIjo3LCJlbWFpbCI6ImZ1cnFhbi5heml6QGludm96b25lLmNvbSIsImlhdCI6MTYzNTIzNzE4MiwiZXhwIjoxNjM1ODQxOTgyfQ.PwagW-RPvgCQELXWrBMJgaowRdWDddgOoTXxJD2aFtM'
+        }
+    })
     const roles = await res.json();
 
     return {

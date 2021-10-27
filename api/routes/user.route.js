@@ -9,13 +9,15 @@ const {
   update,
   destroy,
   login,
-  changePassword
+  token,
+  changePassword,
 } = require('../controllers/user.controller');
 const { checkRole, userAuth } = require('../utils/Auth');
 
 /* Route Router */
 router.get('/', userAuth, checkRole(['admin', 'teacher']), index);
 router.post('/login', login);
+router.post('/token', token);
 router.get('/:id/show', userAuth, checkRole(['teacher', 'admin']), show);
 router.post('/signup', register);
 router.put(
