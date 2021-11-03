@@ -1,12 +1,17 @@
 const express = require('express');
 const passport = require('passport');
+const cron = require('node-cron');
 const indexRouter = require('./routes/index');
+const { sendEmail } = require('./utils/Mail');
 
 const app = express();
 require('dotenv').config();
 
 const port = process.env.PORT || 4000;
-
+cron.schedule(
+  '* * * 1 *',
+  sendEmail('Hey there, this email was sent to you automatically'),
+);
 // app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
