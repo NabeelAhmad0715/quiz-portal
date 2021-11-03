@@ -5,9 +5,10 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
+    'airbnb-base',
   ],
   parserOptions: {
-    ecmaVersion: 2018,
+    ecmaVersion: 12,
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
@@ -20,6 +21,8 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'react/prop-types': 0,
     'no-empty-function': 'off',
+    'no-console': 'off',
+    'arrow-body-style': 'off',
   },
   settings: {
     react: {

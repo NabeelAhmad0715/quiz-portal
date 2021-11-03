@@ -13,7 +13,9 @@
     "babel-plugin-styled-components": "^1.13.2",
     "express": "^4.17.1",
     "http-proxy-middleware": "^2.0.1",
+    "jsonwebtoken": "^8.5.1",
     "next": "^11.1.2",
+    "next-js-suggest-input": "^1.0.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "styled-components": "5.3.1"
@@ -31,7 +33,15 @@
     "build": "next build",
     "start": "next start --port ${PORT-4000}",
     "export": "yarn build && next export -o _static",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "prettier": "prettier --check **/*.tsx",
+    "format": "prettier -w .",
+    "prettier:fix": "prettier --write **/*.tsx"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "husky pre-commit"
+    }
   },
   "repository": {
     "type": "git",

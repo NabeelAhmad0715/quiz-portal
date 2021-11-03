@@ -12,12 +12,12 @@ import { Menu, MenuRefObject } from '@paljs/ui/Menu';
 import Link from 'next/link';
 import menuItems from './menuItem';
 import Meta from './meta';
-
-const LayoutPage = ({ children, ...rest }) => {
+const LayoutPage = ({ auth, children, ...rest }) => {
+  // const [authUser, setAuthUser] = useState('')
+  const router = useRouter();
   const [theme, setTheme] = useState<DefaultTheme['name']>('default');
   const [dir, setDir] = useState<'ltr' | 'rtl'>('ltr');
   const sidebarRef = useRef<SidebarRefObject>(null);
-  const router = useRouter();
   const [menuState, setMenuState] = useState(false);
   const menuRef = useRef<MenuRefObject>(null);
   const [seeHeader, setSeeHeader] = useState(true);
@@ -25,19 +25,17 @@ const LayoutPage = ({ children, ...rest }) => {
   const getState = (state?: 'hidden' | 'visible' | 'compacted' | 'expanded') => {
     setSeeHeader(state !== 'compacted');
   };
-
   const authLayout = router.pathname.startsWith('/auth');
-
+  console.log(auth,"auth");
   return (
     <Fragment>
-      <Meta />
+      <Meta/>
       <ThemeProvider theme={themes(theme, dir)}>
-        <Fragment>
+      <Fragment>
           <Layout evaIcons={icons} className={!authLayout ? 'auth-layout' : ''}>
-              <Header
-                toggleSidebar={() => sidebarRef.current?.toggle()}
-              />
+            {!authLayout && <Header toggleSidebar={() => sidebarRef.current?.toggle()} />}
             <LayoutContainer>
+              {!authLayout && (
                 <Sidebar
                   getState={getState}
                   ref={sidebarRef}
@@ -73,6 +71,7 @@ const LayoutPage = ({ children, ...rest }) => {
                     />
                   </SidebarBody>
                 </Sidebar>
+              )}
               <LayoutContent>
                 <LayoutColumns>
                   <LayoutColumn className="main-content">{children}</LayoutColumn>

@@ -4,27 +4,25 @@ const { Question } = require('../models');
 
 const index = async (req, res, _next) => {
   try {
-    const questionBanks = await QuestionBank.findAll(
-      { where: { user_id: req.body.user_id } },
-      {
-        tableName: 'question_banks',
-        include: [
-          {
-            model: User,
-            as: 'users',
-          },
-          {
-            model: Question,
-            as: 'questions',
-          },
-        ],
-        order: [
-          ['createdAt', 'DESC'],
-          [{ model: User, as: 'users' }, 'createdAt', 'DESC'],
-          [{ model: Question, as: 'questions' }, 'createdAt', 'DESC'],
-        ],
-      },
-    );
+    const questionBanks = await QuestionBank.findAll({
+      tableName: 'question_banks',
+      include: [
+        {
+          model: User,
+          as: 'users',
+          where: { id: req.body.user_id },
+        },
+        {
+          model: Question,
+          as: 'questions',
+        },
+      ],
+      order: [
+        ['createdAt', 'DESC'],
+        [{ model: User, as: 'users' }, 'createdAt', 'DESC'],
+        [{ model: Question, as: 'questions' }, 'createdAt', 'DESC'],
+      ],
+    });
     return res.status(200).json(questionBanks);
   } catch (err) {
     console.log(err);
@@ -34,11 +32,14 @@ const index = async (req, res, _next) => {
 
 const show = async (req, res, _next) => {
   try {
-    const questionBank = await QuestionBank.findByPk(req.body.id, {
+    const { id, user_id: userId } = req.body;
+    console.log(userId, id);
+    const questionBank = await QuestionBank.findByPk(id, {
       include: [
         {
           model: User,
           as: 'users',
+          where: { id: userId },
         },
         {
           model: Question,
@@ -64,12 +65,11 @@ const show = async (req, res, _next) => {
 
 const store = async (req, res, _next) => {
   try {
-    console.log('hello');
     const { name, type, user_id: userId } = req.body;
     const questionBank = await QuestionBank.create({
       name,
       type,
-      userId,
+      user_id: userId,
     });
     return res.status(200).json(questionBank);
   } catch (err) {
@@ -85,6 +85,7 @@ const update = async (req, res, _next) => {
         {
           model: User,
           as: 'users',
+          where: { id: userId },
         },
         {
           model: Question,

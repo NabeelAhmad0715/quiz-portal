@@ -40,15 +40,6 @@ const HeaderStyle = styled.div`
   }
 `;
 
-const Label = styled.span`
-  display: flex;
-  align-items: center;
-`;
-
-const SelectStyled = styled(Select)`
-  min-width: 150px;
-`;
-
 const Header = (props) => {
   const router = useRouter();
   return (
@@ -89,7 +80,12 @@ const Header = (props) => {
                   ]}
                   Link={Link}
                 >
-                  <User image="url('/icons/icon-72x72.png')" name="Nabeel Amjad" title="Software Engineer" size="Medium" />
+                  <User
+                    image="url('/icons/icon-72x72.png')"
+                    name="Nabeel Amjad"
+                    title="Software Engineer"
+                    size="Medium"
+                  />
                 </ContextMenu>
               ),
             },

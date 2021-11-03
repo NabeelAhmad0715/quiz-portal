@@ -11,14 +11,14 @@ const {
 const { checkRole, userAuth } = require('../utils/Auth');
 
 /* Route Router */
-router.get('/', userAuth, checkRole(['teacher', 'admin']), index);
-router.get('/:id/show', userAuth, checkRole(['teacher', 'admin']), show);
-router.post('/create', userAuth, checkRole(['teacher', 'admin']), store);
-router.put('/:id/update', userAuth, checkRole(['teacher', 'admin']), update);
+router.post('/', userAuth, checkRole(['admin', 'teacher']), index);
+router.post('/:id/show', userAuth, checkRole(['admin', 'teacher']), show);
+router.post('/create', userAuth, checkRole(['admin', 'teacher']), store);
+router.put('/:id/update', userAuth, checkRole(['admin', 'teacher']), update);
 router.delete(
   '/:id/delete',
   userAuth,
-  checkRole(['teacher', 'admin']),
+  checkRole(['admin', 'teacher']),
   destroy,
 );
 module.exports = router;
