@@ -1,8 +1,9 @@
 import { Button } from '@paljs/ui/Button';
 import { InputGroup } from '@paljs/ui/Input';
+import { Checkbox } from '@paljs/ui/Checkbox';
 import React from 'react';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Router from 'next/router';
 import Auth, { Group } from 'components/Auth';
 import Layout from 'Layouts';
@@ -25,14 +26,13 @@ async function sendUserData(userDetails) {
 const login = () => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  // const [auth, setAuth] = useState(false);
-  // useEffect(() => {
-  //   const user = true;
-  //   JSON.parse(localStorage.setItem('user'));
-  //     // router.push('/dashboard');
-  //   setAuth(user ? true : false);
+  const [auth, setAuth] = useState(false);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+      // router.push('/dashboard');
+    setAuth(user ? true : false);
 
-  // }),[];
+  }),[];
   async function sendMessageHandler(event) {
     event.preventDefault();
     try {
@@ -40,19 +40,18 @@ const login = () => {
         password: password,
         email: email,
       });
-      if (response) {
-        const result = await response.json();
-        setEmail('');
-        setPassword('');
-        localStorage.setItem('user', JSON.stringify(result));
-        Router.push('/dashboard');
-      }
+
+      const result = await response.json();
+      setEmail('');
+      setPassword('');
+      localStorage.setItem('user', JSON.stringify(result));
+      Router.push('/dashboard');
     } catch (error) {
       Router.push('/auth/login');
     }
   }
   return (
-    <Layout title="Login" auth="false">
+    <Layout title="Login" auth={auth}>
       <Auth title="Login" subTitle="Hello! Login with your email">
         <form onSubmit={sendMessageHandler}>
           <InputGroup fullWidth>

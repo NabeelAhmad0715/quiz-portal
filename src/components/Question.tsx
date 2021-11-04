@@ -15,7 +15,7 @@ export default function index({ record }) {
         'Content-Type': 'application/json',
       },
     });
-    await response.json();
+    const data = await response.json();
     Router.push('/questions');
   }
   return (
