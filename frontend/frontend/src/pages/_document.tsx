@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+import React, { useEffect, useState } from 'react';
 class MyDocument extends Document {
 
   render() {

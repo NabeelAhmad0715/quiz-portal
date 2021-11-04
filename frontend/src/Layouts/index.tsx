@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect, Fragment } from 'react';
-import { DefaultTheme, ThemeProvider } from 'styled-components';
+import React, { useState, useRef, Fragment } from 'react';
+import { ThemeProvider } from 'styled-components';
 import themes from './themes';
 import { Layout, LayoutContent, LayoutFooter, LayoutContainer, LayoutColumns, LayoutColumn } from '@paljs/ui/Layout';
 import icons from '@paljs/icons';
@@ -11,12 +11,19 @@ import { Button } from '@paljs/ui/Button';
 import { Menu, MenuRefObject } from '@paljs/ui/Menu';
 import Link from 'next/link';
 import menuItems from './menuItem';
+<<<<<<< HEAD:src/Layouts/index.tsx
+import Meta from '../Layouts/Meta';
+const LayoutPage = ({ auth, children }) => {
+  const router = useRouter();
+  const [theme] = useState('default');
+=======
 import Meta from './meta';
 const LayoutPage = ({ auth, children, ...rest }) => {
   // const [authUser, setAuthUser] = useState('')
   const router = useRouter();
   const [theme, setTheme] = useState<DefaultTheme['name']>('default');
   const [dir, setDir] = useState<'ltr' | 'rtl'>('ltr');
+>>>>>>> 44e420ad6df7e4391ff71014b424c378afae8471:frontend/src/Layouts/index.tsx
   const sidebarRef = useRef<SidebarRefObject>(null);
   const [menuState, setMenuState] = useState(false);
   const menuRef = useRef<MenuRefObject>(null);
@@ -29,8 +36,13 @@ const LayoutPage = ({ auth, children, ...rest }) => {
   console.log(auth,"auth");
   return (
     <Fragment>
+<<<<<<< HEAD:src/Layouts/index.tsx
+        <Meta/>
+      <ThemeProvider theme={themes(theme)}>
+=======
       <Meta/>
       <ThemeProvider theme={themes(theme, dir)}>
+>>>>>>> 44e420ad6df7e4391ff71014b424c378afae8471:frontend/src/Layouts/index.tsx
       <Fragment>
           <Layout evaIcons={icons} className={!authLayout ? 'auth-layout' : ''}>
             {!authLayout && <Header toggleSidebar={() => sidebarRef.current?.toggle()} />}

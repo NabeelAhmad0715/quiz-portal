@@ -25,7 +25,7 @@ const ErrorStyle = styled.div`
 export default function Error(): JSX.Element {
   const router = useRouter();
   return (
-    <Layout title="404 Page Not Found">
+    <Layout auth="true">
       <Card>
         <CardBody>
           <ErrorStyle>
