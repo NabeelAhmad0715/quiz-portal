@@ -1,11 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import styled, { DefaultTheme } from 'styled-components';
-import Select from '@paljs/ui/Select';
+import styled from 'styled-components';
 import { LayoutHeader } from '@paljs/ui/Layout';
-import { EvaIcon } from '@paljs/ui/Icon';
-import { Button } from '@paljs/ui/Button';
 import { Actions } from '@paljs/ui/Actions';
 import ContextMenu from '@paljs/ui/ContextMenu';
 import User from '@paljs/ui/User';
@@ -38,15 +35,6 @@ const HeaderStyle = styled.div`
       margin-right: 5px;
     }
   }
-`;
-
-const Label = styled.span`
-  display: flex;
-  align-items: center;
-`;
-
-const SelectStyled = styled(Select)`
-  min-width: 150px;
 `;
 
 const Header = (props) => {
@@ -89,7 +77,12 @@ const Header = (props) => {
                   ]}
                   Link={Link}
                 >
-                  <User image="url('/icons/icon-72x72.png')" name="Nabeel Amjad" title="Software Engineer" size="Medium" />
+                  <User
+                    image="url('/icons/icon-72x72.png')"
+                    name="Nabeel Amjad"
+                    title="Software Engineer"
+                    size="Medium"
+                  />
                 </ContextMenu>
               ),
             },

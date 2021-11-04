@@ -4,7 +4,7 @@ const items: MenuItemType[] = [
   {
     title: 'Home Page',
     icon: { name: 'home' },
-    link: { href: '/dashboard' },
+    link: { href: '/' },
   },
   {
     title: 'FEATURES',
@@ -44,11 +44,11 @@ const items: MenuItemType[] = [
     children: [
       {
         title: 'Add A New Question Bank',
-        link: { href: '/extra-components/accordion' },
+        link: { href: '/question-banks/create' },
       },
       {
         title: 'View all Question Banks',
-        link: { href: '/extra-components/actions' },
+        link: { href: '/question-banks' },
       },
     ],
   },
@@ -58,11 +58,11 @@ const items: MenuItemType[] = [
     children: [
       {
         title: 'Add A New Question',
-        link: { href: '/extra-components/accordion' },
+        link: { href: '/questions/create' },
       },
       {
         title: 'View all Questions',
-        link: { href: '/extra-components/actions' },
+        link: { href: '/questions' },
       },
     ],
   },
@@ -103,6 +103,11 @@ const items: MenuItemType[] = [
         link: { href: '/extra-components/actions' },
       },
     ],
+  },
+  {
+    title: 'Logout',
+    icon: { name: 'lock-outline' },
+    link: { href: '/extra-components/actions' },
   },
 ];
 

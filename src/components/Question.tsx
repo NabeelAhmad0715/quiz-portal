@@ -8,7 +8,7 @@ export default function index({ record }) {
     const body = {
       id: id,
     };
-    const response = await fetch(`${server}/api/users/${id}/delete`, {
+    const response = await fetch(`${server}/api/question-banks/questions/${id}/delete`, {
       method: 'delete',
       body: JSON.stringify(body),
       headers: {
@@ -16,26 +16,23 @@ export default function index({ record }) {
       },
     });
     await response.json();
-    Router.push('/users');
+    Router.push('/questions');
   }
   return (
     <>
       <tr>
         <th scope="row">{record.id}</th>
-        <td>{record.name}</td>
-        <td>{record.email}</td>
+        <td>{record.question_banks.name}</td>
+        <td>{record.question}</td>
         <td>
-          <span className="badge badge-primary">{record.roles.name}</span>
+          <span className="badge badge-primary">{record.marks} points</span>
         </td>
         <td>{record.createdAt}</td>
         <td className="text-right">
-          <Link href={`/users/${record.id}`}>
+          <Link href={`/questions/${record.id}`}>
             <a className="btn btn-info mr-2"> Edit</a>
           </Link>
-          <Link href={`/users/change-password/${record.id}`}>
-            <a className="btn btn-warning mr-2"> Change Password</a>
-          </Link>
-          <Link href="/users">
+          <Link href="/questions">
             <a
               className="btn btn-danger"
               id={record.id}

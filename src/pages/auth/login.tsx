@@ -1,59 +1,77 @@
 import { Button } from '@paljs/ui/Button';
 import { InputGroup } from '@paljs/ui/Input';
-import { Checkbox } from '@paljs/ui/Checkbox';
 import React from 'react';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Router from 'next/router';
 import Auth, { Group } from 'components/Auth';
 import Layout from 'Layouts';
 import { server } from '../../../config/index';
 
 async function sendUserData(userDetails) {
-  console.log(userDetails);
-
   try {
-      return await fetch(`${server}/api/users/login`, {
-        method: 'POST',
-        body: JSON.stringify(userDetails),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+    return await fetch(`${server}/api/users/login`, {
+      method: 'POST',
+      body: JSON.stringify(userDetails),
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   } catch (error) {
     console.log(error);
   }
 }
 const login = () => {
-    const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
-    async function sendMessageHandler(event) {
-        event.preventDefault();
-        try {
-            const response = await sendUserData({
-              password: password,
-              email: email,
-            });
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  // const [auth, setAuth] = useState(false);
+  // useEffect(() => {
+  //   const user = true;
+  //   JSON.parse(localStorage.setItem('user'));
+  //     // router.push('/dashboard');
+  //   setAuth(user ? true : false);
 
-            const result = await response.json();
-            setEmail('');
-            setPassword('');
-            console.log(result);
-
-            Router.push('/auth/login');
-        } catch (error) {
-            Router.push('/auth/login');
-        }
+  // }),[];
+  async function sendMessageHandler(event) {
+    event.preventDefault();
+    try {
+      const response = await sendUserData({
+        password: password,
+        email: email,
+      });
+      if (response) {
+        const result = await response.json();
+        setEmail('');
+        setPassword('');
+        localStorage.setItem('user', JSON.stringify(result));
+        Router.push('/dashboard');
+      }
+    } catch (error) {
+      Router.push('/auth/login');
     }
+  }
   return (
-    <Layout title="Login">
+    <Layout title="Login" auth="false">
       <Auth title="Login" subTitle="Hello! Login with your email">
         <form onSubmit={sendMessageHandler}>
           <InputGroup fullWidth>
-            <input type="email" placeholder="Email Address" required value={email} onChange={(event) => setEmail(event.target.value)}/>
+            <input
+              type="email"
+              placeholder="Email Address"
+              required
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+            />
           </InputGroup>
           <InputGroup fullWidth>
-            <input type="password" placeholder="Password" required value={password} onChange={(event) => setPassword(event.target.value)}/>
+            <input
+              type="password"
+              placeholder="Password"
+              required
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            />
           </InputGroup>
           <Group>
             <Link href="/auth/request-password">
@@ -73,5 +91,5 @@ const login = () => {
       </Auth>
     </Layout>
   );
-}
-export default login
+};
+export default login;

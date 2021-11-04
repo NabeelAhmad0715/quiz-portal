@@ -14,23 +14,22 @@ const index = ({ records, headings }) => {
           <Col breakPoint={{ xs: 12, md: 12 }}>
             <Card>
               <header>
-                Users
+                Question Banks
                 <p>
                   <Link href="/">
                     <a>Dashboard</a>
                   </Link>{' '}
                   /{' '}
-                  <Link href="/users">
-                    <a>Users</a>
-                  </Link>{' '}
+
+                    Question Banks{' '}
                   / view
                 </p>
-                <Link href="/users/create">
-                  <button className="btn btn-primary">Add A New User</button>
+                <Link href="/question-banks/create">
+                  <button className="btn btn-primary">Add A New Question Bank</button>
                 </Link>
               </header>
               <CardBody>
-                <Table fileName="User" headings={headings} records={records} />
+                <Table fileName="QuestionBank" headings={headings} records={records} />
               </CardBody>
             </Card>
           </Col>
@@ -41,15 +40,19 @@ const index = ({ records, headings }) => {
 };
 
 export const getStaticProps = async () => {
-  const res = await fetch(`${server}/api/users`, {
+  const res = await fetch(`${server}/api/question-banks`, {
+    body: JSON.stringify({
+      user_id: 6,
+    }),
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization:
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJyb2xlX2lkIjo3LCJlbWFpbCI6ImZ1cnFhbi5heml6QGludm96b25lLmNvbSIsImlhdCI6MTYzNTIzNzE4MiwiZXhwIjoxNjM1ODQxOTgyfQ.PwagW-RPvgCQELXWrBMJgaowRdWDddgOoTXxJD2aFtM',
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJyb2xlX2lkIjo3LCJlbWFpbCI6ImZ1cnFhbi5heml6QGludm96b25lLmNvbSIsImlhdCI6MTYzNTc1MTI2NiwiZXhwIjoxNjM1NzUxMzI2fQ.YWjJFFedq1N8XD6Mw2dQvJ0_UNVnuPPB3MH2dgO4ZUw',
     },
   });
   const records = await res.json();
-  const headings = ['#', 'Name', 'Email', 'Role', 'Created At', 'Action'];
+  const headings = ['#', 'Name', 'User', 'Type', 'Created At', 'Action'];
   return {
     props: {
       records,
