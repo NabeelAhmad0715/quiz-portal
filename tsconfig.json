@@ -1,0 +1,58 @@
+{
+  "compilerOptions": {
+    // "allowJs": false,
+    // //"checkJs": true,
+    "alwaysStrict": true,
+    // "esModuleInterop": true,
+    // "forceConsistentCasingInFileNames": false,
+    // "isolatedModules": true,
+    // "jsx": "preserve",
+    // "lib": ["dom", "es2017"],
+    // "module": "esnext",
+    // "moduleResolution": "node",
+    // "noEmit": true,
+    "noFallthroughCasesInSwitch": true,
+    // "resolveJsonModule": true,
+    // "skipLibCheck": true,
+    "strict": false,
+    // "target": "esnext",
+    "baseUrl": ".",
+    "module": "esnext",
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "noUnusedLocals": true, /* Report errors on unused locals. */
+    "noUnusedParameters": true, /* Report errors on unused parameters. */
+    "paths": {
+      "*": [
+        "src/*"
+      ]
+    },
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve"
+  },
+  "exclude": [
+    "node_modules",
+    "next",
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    // "**/*.tsx",
+    "src/*"
+  ]
+}

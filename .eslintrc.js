@@ -1,20 +1,32 @@
 module.exports = {
-  env: {
-    browser: true,
-    es6: true,
+  parser: '@typescript-eslint/parser',
+  extends: [
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'prettier/@typescript-eslint',
+    'plugin:prettier/recommended',
+    'airbnb-base',
+  ],
+  parserOptions: {
+    ecmaVersion: 12,
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
-  extends: ['airbnb-base', 'eslint:recommended'],
-  plugins: ['prettier'],
-  parserOptions: { ecmaVersion: 12 },
   rules: {
-    'prettier/prettier': 'error',
+    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_|^req|^next' }],
+    '@typescript-eslint/no-explicit-any': 0,
+    '@typescript-eslint/explicit-function-return-type': 0,
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    'react/prop-types': 0,
+    'no-empty-function': 'off',
     'no-console': 'off',
     'arrow-body-style': 'off',
-    'prefer-arrow-callback': 'off',
-    'max-classes-per-file': ['error', 2],
-    'global-require': 'off',
-    'import/no-dynamic-require': 'off',
-    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
-    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    },
   },
 };

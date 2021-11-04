@@ -1,63 +1,71 @@
 {
-  "name": "quiz-portal",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "name": "nextjs-admin-template",
+  "private": true,
+  "description": "Admin dashboard template based on nextjs with @paljs/ui component package",
+  "version": "0.1.0",
+  "author": "Ahmed Elywa",
+  "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "29.2.0",
+    "@ckeditor/ckeditor5-react": "3.0.2",
+    "@paljs/icons": "1.0.5",
+    "@paljs/ui": "1.1.1",
+    "@tinymce/tinymce-react": "3.12.6",
+    "babel-plugin-styled-components": "^1.13.2",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^2.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "next": "^11.1.2",
+    "next-js-suggest-input": "^1.0.2",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "styled-components": "5.3.1"
+  },
+  "keywords": [
+    "react",
+    "component",
+    "styled",
+    "oah"
+  ],
+  "license": "MIT",
   "scripts": {
-    "config": "node config/config.json",
-    "server": "nodemon app.js",
-    "start": "node app.js",
+    "start:dev": "NODE_ENV='development' node server.js",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start --port ${PORT-4000}",
+    "export": "yarn build && next export -o _static",
     "prepare": "husky install",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "prettier": "prettier --check **/*.js",
+    "prettier": "prettier --check **/*.tsx",
     "format": "prettier -w .",
-    "prettier:fix": "prettier --write **/*.js",
-    "_migrate": "sequelize db:migrate",
-    "_migrate:status": "sequelize db:migrate:status",
-    "_migrate:undo": "sequelize db:migrate:undo",
-    "_seed": "sequelize db:seed:all",
-    "migrate": "npm-run-all config _migrate",
-    "migrate:status": "npm-run-all config _migrate:status",
-    "migrate:undo": "npm-run-all config _migrate:undo",
-    "seed": "npm-run-all config _seed"
+    "prettier:fix": "prettier --write **/*.tsx"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "husky pre-commit"
+    }
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NabeelAhmad0715/quiz-portal.git"
+    "url": "https://github.com/paljs/nextjs-admin-template"
   },
-  "author": "",
-  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/NabeelAhmad0715/quiz-portal/issues"
-  },
-  "homepage": "https://github.com/NabeelAhmad0715/quiz-portal#readme",
-  "dependencies": {
-    "bcrypt": "^5.0.1",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "passport": "^0.5.0",
-    "passport-jwt": "^4.0.0",
-    "pg": "^8.7.1",
-    "pg-hstore": "^2.3.4",
-    "sequelize": "^6.6.5",
-    "validatorjs": "^3.22.1"
+    "url": "https://github.com/paljs/nextjs-admin-template/issues"
   },
   "devDependencies": {
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-node": "^4.1.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.24.2",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "husky": "^7.0.2",
-    "lint-staged": "^11.1.2",
-    "nodemon": "^2.0.13",
-    "prettier": "^2.4.1",
-    "sequelize-cli": "^6.2.0",
-    "swagger-jsdoc": "^6.1.0",
-    "swagger-ui-express": "^4.1.6"
+    "@types/node": "16.7.10",
+    "@types/react": "17.0.19",
+    "@types/react-dom": "17.0.9",
+    "@types/react-select": "4.0.17",
+    "@types/styled-components": "5.1.13",
+    "@typescript-eslint/eslint-plugin": "4.30.0",
+    "@typescript-eslint/parser": "4.30.0",
+    "eslint": "7.32.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-react": "7.25.1",
+    "husky": "7.0.2",
+    "prettier": "2.3.2",
+    "pretty-quick": "3.1.1",
+    "react-live": "2.3.0",
+    "typescript": "4.4.2"
   }
 }
